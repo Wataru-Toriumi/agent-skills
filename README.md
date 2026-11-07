@@ -23,11 +23,18 @@ Codex のマニフェストはポータブル形式を使う。
 
 ## プラグインを追加する
 
-Node.js 24.12 以降を使い、リポジトリのルートで実行する。
-外部パッケージへの依存はなく、`npm install` や事前ビルドは不要。
+Node.js 24.12 以降と pnpm 12.16.1 を使い、リポジトリのルートで実行する。
+pnpm のバージョンは `package.json` の `packageManager` で固定し、
+`pnpm-lock.yaml` を管理する。初回セットアップは次のとおり。
 
 ```sh
-npm run plugin:new -- my-tools --description '日常の開発作業に使うツール'
+pnpm install --frozen-lockfile
+```
+
+外部パッケージへの依存や事前ビルドはなく、次のコマンドで生成する。
+
+```sh
+pnpm plugin:new my-tools --description '日常の開発作業に使うツール'
 ```
 
 `plugins/my-tools/` の作成とカタログへの登録が完了する。
@@ -93,6 +100,7 @@ ChatGPT デスクトップアプリ側で利用する場合は、アプリを再
 カタログ認識とインストールを確認済み。
 TypeScript 版の生成コマンドは Node.js 26.13.0 の一時環境で、生成内容、
 重複・不正名の拒否、失敗時の後片付けを確認済み。
+pnpm 12.16.1 での frozen-lockfile インストールと生成コマンドの実行も確認済み。
 サンプルスキルの形式検証も確認済み。
 Claude Code CLI は検証環境にないため、上記の `claude plugin validate` と
 実際のスキル呼び出しは利用環境で確認する。

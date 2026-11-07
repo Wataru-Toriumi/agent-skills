@@ -31,7 +31,7 @@ function main(): void {
     },
   });
   if (values.help) {
-    console.log('Usage: npm run plugin:new -- <name> --description <description>');
+    console.log('Usage: pnpm plugin:new <name> --description <description>');
     return;
   }
   const [name] = positionals;
