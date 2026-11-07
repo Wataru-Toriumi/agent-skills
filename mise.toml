@@ -1,0 +1,12 @@
+[tools]
+node = "26.13.0"
+# Keep package.json as the source of truth for pnpm.
+pnpm = "{{ read_json(path='package.json')['packageManager'] | split(pat='@') | last }}"
+
+[tasks.setup]
+description = "Install dependencies using the committed lockfile"
+run = "pnpm install --frozen-lockfile"
+
+[tasks.check]
+description = "Check plugin metadata and run tests"
+run = ["pnpm plugin:check", "pnpm test"]
