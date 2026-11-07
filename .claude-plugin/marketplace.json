@@ -7,6 +7,10 @@
     {
       "name": "ink",
       "source": "./plugins/ink"
+    },
+    {
+      "name": "forge",
+      "source": "./plugins/forge"
     }
   ]
 }

@@ -32,6 +32,7 @@ Codex のマニフェストはポータブル形式を使う。
 | プラグイン | 用途 | スキル |
 | --- | --- | --- |
 | [ink](plugins/ink/README.md) | 要件・設計・意思決定を文書にする | `write-prd`、`write-design-doc`、`write-adr` |
+| [forge](plugins/forge/README.md) | 変更をコミットし、PR とレビューにつなぐ | `commit-changes`、`create-pr`、`review-code` |
 
 ## プラグインを追加する
 
