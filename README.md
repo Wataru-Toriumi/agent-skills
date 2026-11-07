@@ -27,6 +27,12 @@ Codex のマニフェストはポータブル形式を使う。
 [Claude Code のマーケットプレイス](https://code.claude.com/docs/en/plugin-marketplaces)、
 [Claude Code のマニフェスト](https://code.claude.com/docs/en/plugins-reference)。
 
+## プラグイン一覧
+
+| プラグイン | 用途 | スキル |
+| --- | --- | --- |
+| [ink](plugins/ink/README.md) | 要件・設計・意思決定を文書にする | `write-prd`、`write-design-doc`、`write-adr` |
+
 ## プラグインを追加する
 
 Node.js 24.12 以降と pnpm 12.16.1 を使い、リポジトリのルートで実行する。
@@ -131,7 +137,8 @@ pnpm test
   スキルの共通化だけで、これらすべての互換性が保証されるわけではない。
 - 認証情報や各端末のインストールキャッシュは保存しない。
 
-初期状態のカタログは空。ひな形をコピーしてからインストールする。
+カタログに登録されたプラグインを名前で指定してインストールする。
+新しいプラグインは `pnpm plugin:new` でひな形から追加できる。
 
 ## 検証状況
 
