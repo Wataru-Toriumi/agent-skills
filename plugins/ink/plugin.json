@@ -1,6 +1,6 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ink",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "要件・設計・意思決定を文書にする。PRD・Design Doc・ADR の作成と更新を支援する。"
 }
