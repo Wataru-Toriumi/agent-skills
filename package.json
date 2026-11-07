@@ -1,0 +1,11 @@
+{
+  "name": "agent-skills",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.12.0"
+  },
+  "scripts": {
+    "plugin:new": "node scripts/new-plugin.ts"
+  }
+}
