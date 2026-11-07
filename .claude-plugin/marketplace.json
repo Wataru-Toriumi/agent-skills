@@ -3,5 +3,10 @@
   "owner": {
     "name": "toripeeeeee"
   },
-  "plugins": []
+  "plugins": [
+    {
+      "name": "ink",
+      "source": "./plugins/ink"
+    }
+  ]
 }

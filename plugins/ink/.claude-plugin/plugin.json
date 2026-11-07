@@ -1,0 +1,5 @@
+{
+  "name": "ink",
+  "version": "0.1.0",
+  "description": "要件・設計・意思決定を文書にする。PRD・Design Doc・ADR の作成と更新を支援する。"
+}
