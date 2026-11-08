@@ -8,6 +8,7 @@ Claude Code と Codex で使う自作プラグインのソースを管理する�
 ```text
 .claude-plugin/marketplace.json   # 両ツール用の共通カタログ
 plugins/                         # 自作プラグインの本体
+docs/                            # 更新・配布の方針と CI の詳細
 templates/plugin/                # コピーして使うひな形（カタログ未登録）
   plugin.json                    # Codex 用のポータブルマニフェスト
   .claude-plugin/plugin.json     # Claude Code 用マニフェスト
@@ -111,71 +112,20 @@ codex plugin add my-tools@wataru-agent-plugins
 ChatGPT デスクトップアプリ側で利用する場合は、アプリを再起動し、
 プラグイン一覧からこのマーケットプレイスを選んでインストールする。
 
-## 更新と共有
+## 更新方法
 
-プラグインごとに独立した `major.minor.patch` を管理する。
-新規プラグインの初期値は `0.1.0`。配布する変更を加えたら、変更内容を添えて更新する。
+対象プラグインの変更後、変更内容を添えてバージョンを更新し、検証する。
 
 ```sh
-# 更新前のプレビュー（ファイルは変更しない）
+# 更新内容をプレビュー
 pnpm plugin:version my-tools patch --message '入力の検証を修正' --dry-run
 
-# 両マニフェストの version と、プラグイン内の CHANGELOG.md を更新
+# 両マニフェストの version と CHANGELOG.md を更新
 pnpm plugin:version my-tools patch --message '入力の検証を修正'
 
-# ひな形・全プラグインの名前とバージョンの整合性を検証
-pnpm plugin:check
-pnpm test
+# 整合性チェックとテスト
+mise run check
 ```
 
-更新種別は [Semantic Versioning](https://semver.org/) に沿って選ぶ。
-
-| 種別 | 用途 | 例 |
-| --- | --- | --- |
-| `patch` | 互換性を維持した修正 | `1.2.3` → `1.2.4` |
-| `minor` | 互換性を維持した機能追加 | `1.2.3` → `1.3.0` |
-| `major` | 既存の利用方法を壊す変更 | `1.2.3` → `2.0.0` |
-
-`0.x` も指定した桁を更新する（`0.1.0` の `major` は `1.0.0`）。
-現在のコマンドは通常の三桁のバージョンに対応し、プレリリースやビルドメタデータは扱わない。
-二つのマニフェストの名前・バージョンが不一致なら、書き込む前に停止する。
-`CHANGELOG.md` は `# Changelog` 見出しの下に、UTC 日付と変更内容を新しい順で追記する。
-既存ファイルがある場合はこの見出しに揃える。まだ記録のない過去のリリースは補完しない。
-
-このコマンドは手元のファイルを更新する。コミット・タグ作成・push・公開は行わない。
-コード変更からバージョン更新の要否を自動判定する機能はないため、配布する変更ごとに実行する。
-同じプラグインへの更新は一つずつ実行し、差分を確認してからコミットする。
-
-- 名前・説明を変更する場合は、両マニフェストの `name`・`description` を一致させる。
-- 配布後は各ツールで再インストール・再読み込みを確認する。
-  インストール済みのコピーにソース編集が即時反映されるとは限らない。
-- GitHub に push した後は、両ツールの `plugin marketplace add` の引数に
-  `Wataru-Toriumi/agent-skills` を指定して登録できる。非公開の場合は Git 認証が必要。
-- スキル本文では特定ホスト専用のツール名への依存を避ける。
-  MCP・フック・エージェント定義を追加するときは、形式や実行環境の違いを個別に確認する。
-  スキルの共通化だけで、これらすべての互換性が保証されるわけではない。
-- 認証情報や各端末のインストールキャッシュは保存しない。
-
-カタログに登録されたプラグインを名前で指定してインストールする。
-新しいプラグインは `pnpm plugin:new` でひな形から追加できる。
-
-## CI での検証
-
-`.github/workflows/validate.yml` が、全 PR の作成・更新・再オープン時と
-`main` への push 時に検証する。GitHub Actions からの手動実行も可能。
-CI も [mise-action](https://github.com/jdx/mise-action) でツールを導入する。
-`MISE_NODE_VERSION` で Node.js のみ上書きし、24.12.0（最低対応バージョン）と
-26 系の両方で、ローカルと共通の `mise run setup`・`mise run check` を実行する。
-CI の 26 系は最新のパッチ版、通常の開発では `mise.toml` の固定版を使う。
-検証内容は次のとおり。
-
-- `pnpm install --frozen-lockfile`：マニフェストと lockfile の整合性
-- `pnpm plugin:check`：ひな形と各プラグインのマニフェストの名前・バージョンの整合性
-- `pnpm test`：バージョン更新、履歴の保持、dry-run、エラー時の挙動
-- `git diff --exit-code`：検証によって追跡済みファイルが変更されていないこと
-
-PR でのバージョン更新漏れ（変更前後で番号が上がったか）の判定は含まない。
-マージを必ず検証成功後に制限する場合は、GitHub のルールセットで
-`Validate (Node 24.12.0)` と `Validate (Node 26)` を必須チェックに指定する。
-
-各変更の検証結果は PR と GitHub Actions の実行結果で確認する。
+`patch` は変更に応じて `minor`・`major` に置き換える。差分を確認してコミット・pushする。
+更新種別の選び方、配布時の注意点、CI の詳細は [プラグインの更新と配布](docs/plugin-maintenance.md) を参照する。
