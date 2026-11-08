@@ -48,6 +48,7 @@ CI の 26 系は最新のパッチ版、通常の開発では `mise.toml` の固
 検証内容は次のとおり。
 
 - `pnpm install --frozen-lockfile`：マニフェストと lockfile の整合性
+- `mise run lint:md`：rumdl による Markdown の書式チェック
 - `pnpm plugin:check`：ひな形と各プラグインのマニフェストの名前・バージョンの整合性
 - `pnpm test`：バージョン更新、履歴の保持、dry-run、エラー時の挙動
 - `git diff --exit-code`：検証によって追跡済みファイルが変更されていないこと

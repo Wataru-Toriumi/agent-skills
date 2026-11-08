@@ -1,0 +1,9 @@
+[global]
+# 日本語の文章や表を文字数だけで折り返さない。
+disable = ["MD013"]
+exclude = ["node_modules/**"]
+respect-gitignore = true
+
+[per-file-ignores]
+# 文書テンプレートの <...> は記入欄として使う。
+"plugins/*/skills/*/assets/*-template.md" = ["MD033"]
