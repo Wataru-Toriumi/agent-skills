@@ -13,13 +13,7 @@ Claude Code と Codex で使う自作プラグインのソースを管理する�
 
 ## プラグインを追加する
 
-ディレクトリの役割とマニフェストの仕様は [リポジトリの構成](docs/repository-structure.md) を参照する。
-
-[mise](https://mise.jdx.dev/getting-started.html) で開発環境を揃える。
-`mise.toml` に開発用 Node.js 26.13.0 を固定し、pnpm は
-`package.json` の `packageManager`（12.16.1）から読み取る。
-Node.js の最低対応バージョンは引き続き 24.12.0。
-mise の導入後、リポジトリのルートで初回セットアップを実行する。
+[mise](https://mise.jdx.dev/getting-started.html) を導入し、リポジトリのルートで実行する。
 
 ```sh
 mise trust
@@ -28,37 +22,19 @@ mise run setup
 mise run check
 ```
 
-`setup` は `pnpm install --frozen-lockfile`、`check` は
-`pnpm plugin:check` と `pnpm test` を順に実行する。
-`pnpm-lock.yaml` も引き続き管理する。
-
-[mise をシェルに有効化](https://mise.jdx.dev/shells.html)していれば、
-以降の `pnpm` コマンドをそのまま使える。有効化していない環境では
-`mise exec -- pnpm ...` と実行する。`mise run` はシェルへの有効化なしでも使える。
-端末固有の設定は Git 管理対象外の `mise.local.toml` に置く。
-開発用 Node.js の更新は `mise.toml`、pnpm の更新は `package.json` と
-`pnpm-lock.yaml` に反映する。
-
-外部パッケージへの依存や事前ビルドはなく、次のコマンドで生成する。
+次のコマンドで `plugins/my-tools/` を作成し、カタログへ登録する。
+mise をシェルに有効化していない場合は、`pnpm` を `mise exec -- pnpm` に置き換える。
 
 ```sh
 pnpm plugin:new my-tools --description '日常の開発作業に使うツール'
 ```
 
-`plugins/my-tools/` の作成とカタログへの登録が完了する。
-同名のディレクトリや登録がある場合は上書きせず終了する。
-
-`node scripts/new-plugin.ts ...` で直接実行することもできる。
-[Node.js 標準の TypeScript 実行機能](https://nodejs.org/api/typescript.html)を使用するため、
-生成スクリプトでは型を取り除くだけで実行できる構文を使う。
-この実行方法は型チェックを行わない。プラグイン内の実装言語は自由。
-
 `skills/<skill-name>/SKILL.md` にスキルを追加する。各ファイルの先頭には
 `name` と `description` を含む YAML frontmatter を置く。
 用途が決まったらサンプルの `plugin-check/` は削除してよい。
-補助コードはプラグイン内の `scripts/`、資料はスキル内の `references/` などに置く。
-インストール時にプラグイン単位でコピーされるため、プラグイン外への相対参照や
-シンボリックリンクに依存しない。
+
+設定とスクリプトの仕様は [開発ガイド](docs/development.md)、ファイルの配置は
+[リポジトリの構成](docs/repository-structure.md) を参照する。
 
 ## Claude Code で使う
 
