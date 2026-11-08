@@ -44,7 +44,7 @@ pnpm plugin:new my-tools --description '日常の開発作業に使うツール'
 claude plugin validate ./plugins/my-tools
 claude plugin validate .
 claude plugin marketplace add .
-claude plugin install my-tools@wataru-agent-plugins
+claude plugin install my-tools@toripeeeeee-plugins
 ```
 
 新しいセッションで `/my-tools:plugin-check` を実行して読み込みを確認する。
@@ -56,8 +56,8 @@ claude plugin install my-tools@wataru-agent-plugins
 
 ```sh
 codex plugin marketplace add .
-codex plugin list --marketplace wataru-agent-plugins --available --json
-codex plugin add my-tools@wataru-agent-plugins
+codex plugin list --marketplace toripeeeeee-plugins --available --json
+codex plugin add my-tools@toripeeeeee-plugins
 ```
 
 新しいセッションでスキル選択から `plugin-check` を選び、読み込み確認を依頼する。

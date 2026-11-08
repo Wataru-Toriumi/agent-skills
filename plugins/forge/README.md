@@ -18,12 +18,12 @@
 
 ```sh
 claude plugin marketplace add Wataru-Toriumi/agent-skills
-claude plugin install forge@wataru-agent-plugins
+claude plugin install forge@toripeeeeee-plugins
 ```
 
 ```sh
 codex plugin marketplace add Wataru-Toriumi/agent-skills
-codex plugin add forge@wataru-agent-plugins
+codex plugin add forge@toripeeeeee-plugins
 ```
 
 ## 利用例
