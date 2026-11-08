@@ -1,6 +1,8 @@
 # sketch
 
 Mermaid で伝わる図を作る、Claude Code / Codex 用プラグイン。
+
+変更履歴は [GitHub Releases](https://github.com/Wataru-Toriumi/agent-skills/releases?q=sketch) を参照する。
 図種の選定から描画確認までを [draw-mermaid](skills/draw-mermaid/SKILL.md) で行う。
 
 ## 使い方

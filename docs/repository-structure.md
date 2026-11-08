@@ -10,10 +10,13 @@ templates/plugin/                # コピーして使うひな形（カタログ
   skills/plugin-check/SKILL.md   # 共通の読み込み確認スキル
 scripts/new-plugin.ts            # ひな形のコピーとカタログ登録
 scripts/version-plugin.ts        # バージョン更新と整合性チェック
+scripts/publish-releases.ts      # GitHub Release のプレビュー・公開
 scripts/lib/
   plugin-commands.ts             # 作成・検証・バージョン更新の処理手順
   plugin-files.ts                # マニフェストとカタログの読み込み・検証
-  releases.ts                    # バージョン計算と変更履歴の生成
+  releases.ts                    # バージョン計算
+  release-notes.ts               # プラグインごとのタグと変更内容の生成
+  github-releases.ts             # GitHub API による公開と再実行の処理
   files.ts                       # ファイルの読み書きと失敗時の復元
 mise.toml                       # 開発ツールとセットアップ・検証タスク
 ```

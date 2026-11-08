@@ -2,6 +2,8 @@
 
 変更をコミットし、PR とレビューにつなぐ、Claude Code / Codex 用プラグイン。
 
+変更履歴は [GitHub Releases](https://github.com/Wataru-Toriumi/agent-skills/releases?q=forge) を参照する。
+
 ## スキル
 
 | スキル | 用途 |

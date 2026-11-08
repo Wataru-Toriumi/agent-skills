@@ -18,6 +18,7 @@ pnpm の更新時は `packageManager` と `pnpm-lock.yaml` を更新する。
 | `mise run lint:md` | rumdl で Markdown を検査 |
 | `mise run fix:md` | 自動修正し、残った指摘を報告 |
 | `mise run lint:text` | textlint で日本語の冗長表現を検査 |
+| `pnpm plugin:release --repository Wataru-Toriumi/agent-skills` | コミット済みの変更から Release 本文をプレビュー |
 
 [mise をシェルに有効化](https://mise.jdx.dev/shells.html)すると `pnpm` を直接使える。
 有効化しない場合は `mise exec -- pnpm ...` を使う。`mise run` はどちらでも実行できる。
