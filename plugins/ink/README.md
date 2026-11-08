@@ -58,6 +58,14 @@ codex plugin marketplace add Wataru-Toriumi/agent-skills
 codex plugin add ink@wataru-agent-plugins
 ```
 
+## 任意の作図連携
+
+図が必要な場合は、別途導入した `sketch` プラグインの `draw-mermaid` スキルと連携する。
+`ink` が図の目的と内容を決め、`sketch` が作図と描画確認を担当する。
+連携は任意で、利用できない環境でも文書作成は続けられる。
+`sketch` は同じマーケットプレイスから `claude plugin install sketch@wataru-agent-plugins` または
+`codex plugin add sketch@wataru-agent-plugins` で個別に導入する。
+
 ## 利用例
 
 Claude Code では `/ink:write-prd`、`/ink:write-design-doc`、`/ink:write-adr` で呼び出す。
