@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.2] - 2026-11-08
+
+- READMEの概要とPR作成の説明を簡潔化
+
 ## [0.1.1] - 2026-11-08
 
 - create-pr が提出先の PULL_REQUEST_TEMPLATE の構成と記入指示に従う手順を明確化。

@@ -1,5 +1,5 @@
 {
   "name": "ink",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "PRD・Design Doc・ADR の作成と更新、シナリオに基づく設計レビューを支援する。"
 }

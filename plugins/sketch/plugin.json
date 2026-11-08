@@ -1,6 +1,6 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "sketch",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Mermaid で伝わる図を作る。図種の選定、作図、描画確認と改善を支援する。"
 }
