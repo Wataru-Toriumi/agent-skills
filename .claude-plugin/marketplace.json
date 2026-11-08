@@ -11,6 +11,10 @@
     {
       "name": "forge",
       "source": "./plugins/forge"
+    },
+    {
+      "name": "sketch",
+      "source": "./plugins/sketch"
     }
   ]
 }

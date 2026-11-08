@@ -34,6 +34,7 @@ Codex のマニフェストはポータブル形式を使う。
 | --- | --- | --- |
 | [ink](plugins/ink/README.md) | 要件・設計・意思決定を文書にする | `write-prd`、`write-design-doc`、`write-adr` |
 | [forge](plugins/forge/README.md) | 変更をコミットし、PR とレビューにつなぐ | `commit-changes`、`create-pr`、`review-code` |
+| [sketch](plugins/sketch/README.md) | Mermaid の図を作り、描画結果を確認・改善する | `draw-mermaid` |
 
 ## プラグインを追加する
 

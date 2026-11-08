@@ -1,0 +1,5 @@
+{
+  "name": "sketch",
+  "version": "0.1.0",
+  "description": "Mermaid で伝わる図を作る。図種の選定、作図、描画確認と改善を支援する。"
+}
