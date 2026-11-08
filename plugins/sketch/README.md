@@ -9,12 +9,12 @@ Mermaid で伝わる図を作る、Claude Code / Codex 用プラグイン。
 
 ```sh
 claude plugin marketplace add Wataru-Toriumi/agent-skills
-claude plugin install sketch@wataru-agent-plugins
+claude plugin install sketch@toripeeeeee-plugins
 ```
 
 ```sh
 codex plugin marketplace add Wataru-Toriumi/agent-skills
-codex plugin add sketch@wataru-agent-plugins
+codex plugin add sketch@toripeeeeee-plugins
 ```
 
 Claude Code では `/sketch:draw-mermaid`、Codex ではスキル一覧や `draw-mermaid` の名前から利用する。

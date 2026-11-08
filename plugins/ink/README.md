@@ -32,20 +32,20 @@
 
 ```sh
 claude plugin marketplace add Wataru-Toriumi/agent-skills
-claude plugin install ink@wataru-agent-plugins
+claude plugin install ink@toripeeeeee-plugins
 ```
 
 ```sh
 codex plugin marketplace add Wataru-Toriumi/agent-skills
-codex plugin add ink@wataru-agent-plugins
+codex plugin add ink@toripeeeeee-plugins
 ```
 
 ## 任意の作図連携
 
 図が必要な場合は、別途導入した `sketch` プラグインの `draw-mermaid` スキルと連携する。
 未導入でも文書作成はできる。
-`sketch` は同じマーケットプレイスから `claude plugin install sketch@wataru-agent-plugins` または
-`codex plugin add sketch@wataru-agent-plugins` で個別に導入する。
+`sketch` は同じマーケットプレイスから `claude plugin install sketch@toripeeeeee-plugins` または
+`codex plugin add sketch@toripeeeeee-plugins` で個別に導入する。
 
 ## 利用例
 
