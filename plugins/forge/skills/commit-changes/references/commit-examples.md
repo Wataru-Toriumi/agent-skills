@@ -13,3 +13,14 @@
 
 バージョン更新などが必要なら、各配布単位の規約に従って関連コミットへ含める。
 同じプラグイン内で複数に分ける場合も、コミットごとのバージョン更新を一律に要求しない。
+
+## 件名の具体性
+
+| 曖昧な件名 | 変更内容が伝わる件名 |
+| --- | --- |
+| `docs: update README` | `docs: move setup details to development guide` |
+| `docs: simplify plugin documentation` | `docs(forge): shorten PR creation guidance` |
+| `fix: handle errors` | `fix(orders): prevent duplicate orders on retry` |
+
+例の言語・scope は固定しない。実際の差分とリポジトリの規約に合わせる。
+本文が必要なら、例えば「保存後の応答喪失で再送されるため、同じキーの注文を再作成しない」のように、件名だけでは分からない理由を補う。

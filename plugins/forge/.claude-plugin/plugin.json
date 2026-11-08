@@ -1,5 +1,5 @@
 {
   "name": "forge",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "変更をコミットし、PR とレビューにつなぐ。日常の開発フローを支援する。"
 }
