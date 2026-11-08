@@ -9,8 +9,8 @@ description = "Install dependencies using the committed lockfile"
 run = "pnpm install --frozen-lockfile"
 
 [tasks.check]
-description = "Lint Markdown, check plugin metadata, and run tests"
-run = ["mise run lint:md", "pnpm plugin:check", "pnpm test"]
+description = "Lint documents, check plugin metadata, and run tests"
+run = ["mise run lint:md", "mise run lint:text", "pnpm plugin:check", "pnpm test"]
 
 [tasks."lint:md"]
 description = "Check Markdown formatting"
@@ -19,3 +19,7 @@ run = "rumdl check --config .rumdl.toml --deny-config-warnings ."
 [tasks."fix:md"]
 description = "Fix Markdown formatting and report remaining issues"
 run = "rumdl check --config .rumdl.toml --deny-config-warnings --fix ."
+
+[tasks."lint:text"]
+description = "Check Japanese text for redundant expressions"
+run = "pnpm lint:text"

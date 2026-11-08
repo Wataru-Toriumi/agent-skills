@@ -13,9 +13,10 @@ pnpm の更新時は `packageManager` と `pnpm-lock.yaml` を更新する。
 | タスク | 実行内容 |
 | --- | --- |
 | `mise run setup` | `pnpm install --frozen-lockfile` |
-| `mise run check` | Markdown の検査、`pnpm plugin:check`、`pnpm test` |
+| `mise run check` | 文書の検査、`pnpm plugin:check`、`pnpm test` |
 | `mise run lint:md` | rumdl で Markdown を検査 |
 | `mise run fix:md` | 自動修正し、残った指摘を報告 |
+| `mise run lint:text` | textlint で日本語の冗長表現を検査 |
 
 [mise をシェルに有効化](https://mise.jdx.dev/shells.html)すると `pnpm` を直接使える。
 有効化しない場合は `mise exec -- pnpm ...` を使う。`mise run` はどちらでも実行できる。
@@ -27,6 +28,11 @@ CI の検証内容は [プラグインの更新と配布](plugin-maintenance.md#
 設定は [.rumdl.toml](../.rumdl.toml) で管理する。行長制限（MD013）は無効にする。
 文書テンプレートは `<...>` を記入欄に使うため、HTML 判定（MD033）を除外する。
 自動修正後は差分を確認する。CI では検査のみを行う。
+
+[textlint](https://textlint.org/) は同じ範囲の文書を対象に、
+[冗長表現のルール](https://github.com/textlint-ja/textlint-rule-ja-no-redundant-expression)だけを使う。
+設定は [.textlintrc.json](../.textlintrc.json)、除外対象は [.textlintignore](../.textlintignore) で管理する。
+指摘は文脈を確認して修正する。段落間の説明の重複や、内容の要否はレビューで判断する。
 
 ## 生成スクリプト
 
