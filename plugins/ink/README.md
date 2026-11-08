@@ -1,18 +1,19 @@
 # ink
 
-要件・設計・意思決定を文書にする、Claude Code / Codex 用プラグイン。
-既存の資料やリポジトリの文脈を使い、新規文書の作成と既存文書の更新を支援する。
+要件・設計・意思決定を文書にし、設計を検証する Claude Code / Codex 用プラグイン。
+既存の資料やリポジトリの文脈を使い、文書の作成・更新と設計レビューを支援する。
 
 ## スキル
 
-| スキル | 文書で答える問い | 慣例がない場合の保存先 |
+| スキル | 答える問い | 既定の出力先（指定・慣例がない場合） |
 | --- | --- | --- |
 | `write-prd` | 誰の、どの課題を、どこまで解決するか | `docs/prd/<topic>.md` |
 | `write-design-doc` | 要求をどう実現し、どう検証するか | `docs/design/<topic>.md` |
 | `write-adr` | なぜその設計判断を選び、何を受け入れたか | `docs/adr/<番号>-<topic>.md` |
+| `review-design` | どの条件で設計が要求を満たし、どこで破綻するか | 会話 |
 
 ユーザーの指定と利用先リポジトリの書式を優先する。チャット上の草案を依頼した場合は、ファイルを作成しない。
-各スキルの `assets/` に Markdown のひな形を同梱している。
+文書作成スキルの `assets/` に Markdown のひな形を同梱している。
 
 ## 文書の書き方
 
@@ -44,6 +45,19 @@ Design Doc は arc42 の観点を使い、要求・制約から境界と構成�
 PRD の要求 ID・アクターごとの条件・未決事項を引き継ぎ、要求と設計・検証の対応を示す。
 スキル内の `references/framework.md` に適用方針、`references/design-example.md` に具体例を収録している。
 
+## 設計レビュー
+
+`review-design` は ATAM の考え方で重要なリスクを選び、ARID を参考に利用側のコードや操作列で設計を確かめる。
+複雑な競合や状態遷移は、必要に応じて Quint や TLA+ / TLC などのモデル実行で探索する。
+正式な ATAM・ARID 評価ではなく、設計上のリスクとトレードオフを判断できる粒度で整理する。
+設計上の問題、説明不足・未決事項、検証未実施を区別し、根拠・影響・改善の方向性・検証方法を示す。
+結果は重要な指摘、判断に必要な未確認事項、確認範囲と残るリスクに絞り、会話へ返す。
+机上での追跡・シミュレーション・モデル検査・実装のテストを区別し、実行した範囲と限界を残す。
+レビューの依頼だけで設計やコードを書き換えない。
+適用方針と例はスキル内の [framework.md](skills/review-design/references/framework.md) と
+[review-example.md](skills/review-design/references/review-example.md)、実行方法の選び方は
+[model-execution.md](skills/review-design/references/model-execution.md) を参照する。
+
 ## 導入
 
 利用するツールでマーケットプレイスを登録し、インストールする。
@@ -68,11 +82,12 @@ codex plugin add ink@wataru-agent-plugins
 
 ## 利用例
 
-Claude Code では `/ink:write-prd`、`/ink:write-design-doc`、`/ink:write-adr` で呼び出す。
+Claude Code では `/ink:write-prd`、`/ink:write-design-doc`、`/ink:write-adr`、`/ink:review-design` で呼び出す。
 Codex ではインストール後のスキル一覧から該当スキルを選ぶか、スキル名を指定して依頼する。
 
 - 「write-prd で、社内申請の承認待ちを減らす機能の PRD を作成して。対象は申請者と承認者。分析メモはこのファイル。Job と要求を対応付け、受け入れ条件まで整理して」
 - 「write-design-doc で、この PRD と既存コードをもとに通知機能の Design Doc を作成して。要求と設計・検証を対応付け、再送と重複通知の扱いも整理して」
+- 「review-design で、この注文 API の設計をレビューして。PRD と関連コードを参照し、同時実行・再送・依存先の停止時にも要求を満たせるか確認して」
 - 「write-adr で、同期処理からキュー方式への変更判断を記録して。選択理由と受け入れる運用負担はこのメモを参照して」
 - 「write-adr で、既存 ADR を置き換える提案を作成して。まだ採用は決まっていない」
 

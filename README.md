@@ -7,7 +7,7 @@ Claude Code と Codex で使う自作プラグインのソースを管理する�
 
 | プラグイン | 用途 | スキル |
 | --- | --- | --- |
-| [ink](plugins/ink/README.md) | 要件・設計・意思決定を文書にする | `write-prd`、`write-design-doc`、`write-adr` |
+| [ink](plugins/ink/README.md) | 要件・設計・意思決定を文書にし、設計を検証する | `write-prd`、`write-design-doc`、`write-adr`、`review-design` |
 | [forge](plugins/forge/README.md) | 変更をコミットし、PR とレビューにつなぐ | `commit-changes`、`create-pr`、`review-code` |
 | [sketch](plugins/sketch/README.md) | Mermaid の図を作り、描画結果を確認・改善する | `draw-mermaid` |
 
