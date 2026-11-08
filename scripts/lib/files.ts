@@ -25,17 +25,6 @@ export function readTextFile(path: string): TextFile {
   return { path, content: fs.readFileSync(path, 'utf8') };
 }
 
-export function readOptionalTextFile(path: string): TextFile | null {
-  try {
-    return readTextFile(path);
-  } catch (error) {
-    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {
-      return null;
-    }
-    throw error;
-  }
-}
-
 export function readJsonFile(path: string): { file: TextFile; value: unknown } {
   const file = readTextFile(path);
   return { file, value: JSON.parse(file.content) };

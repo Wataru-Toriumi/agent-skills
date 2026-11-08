@@ -2,6 +2,8 @@
 
 要件・設計・意思決定を文書にし、設計を検証する Claude Code / Codex 用プラグイン。
 
+変更履歴は [GitHub Releases](https://github.com/Wataru-Toriumi/agent-skills/releases?q=ink) を参照する。
+
 ## スキル
 
 | スキル | 答える問い | 既定の出力先 |

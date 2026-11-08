@@ -9,20 +9,19 @@ function main(): void {
   const { values, positionals } = parseArgs({
     allowPositionals: true,
     options: {
-      message: { type: 'string' },
       'dry-run': { type: 'boolean' },
       check: { type: 'boolean' },
       help: { type: 'boolean', short: 'h' },
     },
   });
   if (values.help) {
-    console.log('Usage: pnpm plugin:version <name> <patch|minor|major> --message <summary> [--dry-run]');
+    console.log('Usage: pnpm plugin:version <name> <patch|minor|major> [--dry-run]');
     console.log('       pnpm plugin:check');
     return;
   }
 
   if (values.check) {
-    if (positionals.length || values.message !== undefined || values['dry-run']) {
+    if (positionals.length || values['dry-run']) {
       throw new Error('--check cannot be combined with versioning arguments.');
     }
     const result = checkPluginVersions(root);
@@ -37,7 +36,6 @@ function main(): void {
   const result = versionPlugin(root, {
     name,
     release: parseReleaseType(release),
-    message: values.message ?? '',
     dryRun: values['dry-run'],
   });
   console.log(`${values['dry-run'] ? '[dry-run] ' : ''}${name}: ${result.previous} -> ${result.next}`);

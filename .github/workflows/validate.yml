@@ -10,8 +10,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   validate:
@@ -43,3 +43,27 @@ jobs:
 
       - name: Verify tracked files are unchanged
         run: git diff --exit-code
+
+  release:
+    name: Publish plugin releases
+    needs: validate
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: Check out validated commit and full history
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up tools with mise
+        uses: jdx/mise-action@v5
+
+      - name: Publish missing plugin releases
+        run: mise exec -- node scripts/publish-releases.ts --publish
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

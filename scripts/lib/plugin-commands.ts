@@ -1,7 +1,6 @@
 import fs from 'node:fs';
 import { join } from 'node:path';
-import { applyFileEdits, formatJson, readOptionalTextFile } from './files.ts';
-import type { FileEdit } from './files.ts';
+import { applyFileEdits, formatJson } from './files.ts';
 import {
   assertPluginName,
   listPluginNames,
@@ -11,7 +10,7 @@ import {
   readPluginDirectory,
   templateDirectory,
 } from './plugin-files.ts';
-import { nextVersion, prependChangelogEntry } from './releases.ts';
+import { nextVersion } from './releases.ts';
 import type { ReleaseType } from './releases.ts';
 
 type CreatePluginOptions = {
@@ -22,7 +21,6 @@ type CreatePluginOptions = {
 type VersionPluginOptions = {
   name: string;
   release: ReleaseType;
-  message: string;
   dryRun?: boolean;
 };
 
@@ -74,31 +72,13 @@ export function checkPluginVersions(root: string): { plugins: string[] } {
   return { plugins };
 }
 
-function planChangelogEdit(directory: string, version: string, message: string): FileEdit {
-  const path = join(directory, 'CHANGELOG.md');
-  const previous = readOptionalTextFile(path);
-  const content = previous?.content ?? null;
-  const after = prependChangelogEntry(content, {
-    version,
-    message,
-    date: new Date().toISOString().slice(0, 10),
-  });
-  return { path, before: content, after };
-}
-
 export function versionPlugin(root: string, options: VersionPluginOptions): VersionResult {
-  const { name, release, message, dryRun = false } = options;
+  const { name, release, dryRun = false } = options;
   assertPluginName(name);
-  if (!message.trim()) {
-    throw new Error('--message must describe the change.');
-  }
 
   const plugin = readPluginDirectory(pluginDirectory(root, name), name);
   const next = nextVersion(plugin.version, release);
-  const edits = [
-    ...planManifestEdits(plugin, { version: next }),
-    planChangelogEdit(plugin.directory, next, message),
-  ];
+  const edits = planManifestEdits(plugin, { version: next });
 
   if (!dryRun) {
     applyFileEdits(edits);

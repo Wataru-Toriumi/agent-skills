@@ -17,7 +17,7 @@
 
 ## 変更と検証
 
-- 新規プラグインは `pnpm plugin:new` で作成する。配布内容を変更したら `pnpm plugin:version` で両マニフェストと変更履歴を更新する。種別は [更新と配布](docs/plugin-maintenance.md#バージョン管理) に従う。
+- 新規プラグインは `pnpm plugin:new` で作成する。配布内容を変更したら `pnpm plugin:version` で両マニフェストを更新する。変更内容はコミット・PR に記載し、GitHub Release に集約する。種別は [更新と配布](docs/plugin-maintenance.md#バージョン管理) に従う。
 - 完了前に `mise run check` を実行する。同じ差分で成功済みなら結果を再利用する。未実行・失敗した検証は明記する。
 - スキルの検証では lint に加え、参照先、手順の矛盾、操作範囲を確認する。判断や手順を大きく変える場合は、具体的な利用例でも確かめる。
 

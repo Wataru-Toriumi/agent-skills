@@ -66,18 +66,19 @@ ChatGPT デスクトップアプリ側で利用する場合は、アプリを再
 
 ## 更新方法
 
-対象プラグインの変更後、変更内容を添えてバージョンを更新し、検証する。
+対象プラグインの変更後、バージョンを更新し、検証する。
 
 ```sh
 # 更新内容をプレビュー
-pnpm plugin:version my-tools patch --message '入力の検証を修正' --dry-run
+pnpm plugin:version my-tools patch --dry-run
 
-# 両マニフェストの version と CHANGELOG.md を更新
-pnpm plugin:version my-tools patch --message '入力の検証を修正'
+# 両マニフェストの version を更新
+pnpm plugin:version my-tools patch
 
 # 整合性チェックとテスト
 mise run check
 ```
 
 `patch` は変更に応じて `minor`・`major` に置き換える。差分を確認してコミット・pushする。
+main へのマージ後、検証に成功するとプラグインごとの [GitHub Release](https://github.com/Wataru-Toriumi/agent-skills/releases) が作成される。
 更新種別の選び方、配布時の注意点、CI の詳細は [プラグインの更新と配布](docs/plugin-maintenance.md) を参照する。
