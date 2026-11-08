@@ -1,6 +1,6 @@
 # ink
 
-要件・設計・意思決定を文書にし、設計を検証する Claude Code / Codex 用プラグイン。
+要件・計画・設計・意思決定を文書にし、設計を検証する Claude Code / Codex 用プラグイン。
 
 変更履歴は [GitHub Releases](https://github.com/Wataru-Toriumi/agent-skills/releases?q=ink) を参照する。
 
@@ -9,6 +9,7 @@
 | スキル | 答える問い | 既定の出力先 |
 | --- | --- | --- |
 | [write-prd](skills/write-prd/SKILL.md) | 誰の、どの課題を、どこまで解決するか | `docs/prd/<topic>.md` |
+| [write-work-item](skills/write-work-item/SKILL.md) | イニシアチブ・エピック・ストーリーで何を目指し、どこまで届けるか | `docs/work-items/<type>/<topic>.md` |
 | [write-design-doc](skills/write-design-doc/SKILL.md) | 要求をどう実現し、どう検証するか | `docs/design/<topic>.md` |
 | [write-adr](skills/write-adr/SKILL.md) | なぜその設計判断を選び、何を受け入れたか | `docs/adr/<番号>-<topic>.md` |
 | [review-design](skills/review-design/SKILL.md) | どの条件で設計が要求を満たし、どこで破綻するか | 会話 |
@@ -23,6 +24,7 @@
 | ADR | 決定・背景と理由・受け入れる不利益 |
 | Design Doc | 目的・提案する設計・検証計画 |
 | PRD | 課題と目的・スコープ・要求と受け入れ条件 |
+| イニシアチブ・エピック・ストーリー | 目的・範囲・成果や完了の確認方法・親子のつながり |
 | 設計レビュー | 指摘・未確認事項・確認範囲と残るリスク |
 
 各スキルの手順・フレームワーク・具体例は、上のスキル一覧から参照できる。
@@ -51,10 +53,12 @@ codex plugin add ink@toripeeeeee-plugins
 
 ## 利用例
 
-Claude Code では `/ink:write-prd`、`/ink:write-design-doc`、`/ink:write-adr`、`/ink:review-design` で呼び出す。
+Claude Code では `/ink:<スキル名>`（例: `/ink:write-work-item`）で呼び出す。
 Codex ではインストール後のスキル一覧から該当スキルを選ぶか、スキル名を指定して依頼する。
 
 - 「write-prd で、この分析メモから社内申請の PRD を作成して。対象は申請者と承認者」
+- 「write-work-item で、この PRD をイニシアチブ・エピック・ストーリーに整理して」
+- 「write-work-item で、このストーリーの説明と受け入れ条件を更新して。親エピックとの整合も確認して」
 - 「write-design-doc で、この PRD と既存コードから通知機能を設計して。再送と重複通知も考慮して」
 - 「review-design で、この注文 API の設計をレビューして。同時実行・再送・依存先の停止を確認して」
 - 「write-adr で、このメモをもとに同期処理からキュー方式への変更判断を記録して」
