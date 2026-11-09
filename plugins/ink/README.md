@@ -1,6 +1,6 @@
 # ink
 
-要件・計画・設計・意思決定を文書にし、設計を検証する Claude Code / Codex 用プラグイン。
+要求整理・文書作成・設計レビューを支援する Claude Code / Codex 用プラグイン。
 
 変更履歴は [GitHub Releases](https://github.com/Wataru-Toriumi/agent-skills/releases?q=ink) を参照する。
 
@@ -8,6 +8,7 @@
 
 | スキル | 答える問い | 既定の出力先 |
 | --- | --- | --- |
+| [clarify-requirements](skills/clarify-requirements/SKILL.md) | 要望の背景は何か、何が分かれば要求を決められるか | 会話 |
 | [write-prd](skills/write-prd/SKILL.md) | 誰の、どの課題を、どこまで解決するか | `docs/prd/<topic>.md` |
 | [write-work-item](skills/write-work-item/SKILL.md) | イニシアチブ・エピック・ストーリーで何を目指し、どこまで届けるか | `docs/work-items/<type>/<topic>.md` |
 | [write-design-doc](skills/write-design-doc/SKILL.md) | 要求をどう実現し、どう検証するか | `docs/design/<topic>.md` |
@@ -21,6 +22,7 @@
 
 | 文書 | 基本構成 |
 | --- | --- |
+| 要求整理 | 目的と範囲・根拠を伴う要求・未決事項と次の確認 |
 | ADR | 決定・背景と理由・受け入れる不利益 |
 | Design Doc | 目的・提案する設計・検証計画 |
 | PRD | 課題と目的・スコープ・要求と受け入れ条件 |
@@ -56,6 +58,8 @@ codex plugin add ink@toripeeeeee-plugins
 Claude Code では `/ink:<スキル名>`（例: `/ink:write-work-item`）で呼び出す。
 Codex ではインストール後のスキル一覧から該当スキルを選ぶか、スキル名を指定して依頼する。
 
+- 「clarify-requirements で、申請の見落としを減らしたいという要望を、質問しながら深掘りして」
+- 「clarify-requirements で、このヒアリングメモから要求と未決事項を整理して」
 - 「write-prd で、この分析メモから社内申請の PRD を作成して。対象は申請者と承認者」
 - 「write-work-item で、この PRD をイニシアチブ・エピック・ストーリーに整理して」
 - 「write-work-item で、このストーリーの説明と受け入れ条件を更新して。親エピックとの整合も確認して」
