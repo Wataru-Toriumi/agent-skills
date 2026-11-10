@@ -1,6 +1,6 @@
 # forge
 
-変更をコミットし、PR とレビューにつなぐ、Claude Code / Codex 用プラグイン。
+コードの整理からコミット・PR・レビューまでを支援する、Claude Code / Codex 用プラグイン。
 
 変更履歴は [GitHub Releases](https://github.com/Wataru-Toriumi/agent-skills/releases?q=forge) を参照する。
 
@@ -8,6 +8,7 @@
 
 | スキル | 用途 |
 | --- | --- |
+| [refactor-code](skills/refactor-code/SKILL.md) | 振る舞いを保ち、責務・依存関係・重複を整理する |
 | [commit-changes](skills/commit-changes/SKILL.md) | 差分を確認し、意味のある単位でコミットする |
 | [create-pr](skills/create-pr/SKILL.md) | 変更と検証結果を整理し、GitHub PR を作成・更新する |
 | [review-code](skills/review-code/SKILL.md) | 差分と関連コードを読み、根拠のある問題を指摘する |
@@ -34,6 +35,7 @@ codex plugin add forge@toripeeeeee-plugins
 Claude Code では `/forge:<スキル名>`（例: `/forge:address-pr-comments`）で呼び出す。
 Codex ではインストール後のスキル一覧から該当スキルを選ぶか、スキル名を指定して依頼する。
 
+- 「refactor-code で、請求計算と送信処理の責務を分けて。振る舞いは維持して」
 - 「commit-changes で、今回の修正を意味のある単位に分けてコミットして」
 - 「create-pr で、このブランチから main 向けの PR を作成して」
 - 「create-pr で、PR の説明文だけ下書きして」
