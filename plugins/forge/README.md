@@ -9,6 +9,7 @@
 | スキル | 用途 |
 | --- | --- |
 | [refactor-code](skills/refactor-code/SKILL.md) | 振る舞いを保ち、責務・依存関係・重複を整理する |
+| [tidy-code](skills/tidy-code/SKILL.md) | 今触る箇所を小さく整え、理解や次の変更を助ける |
 | [commit-changes](skills/commit-changes/SKILL.md) | 差分を確認し、意味のある単位でコミットする |
 | [create-pr](skills/create-pr/SKILL.md) | 変更と検証結果を整理し、GitHub PR を作成・更新する |
 | [review-code](skills/review-code/SKILL.md) | 差分と関連コードを読み、根拠のある問題を指摘する |
@@ -36,6 +37,7 @@ Claude Code では `/forge:<スキル名>`（例: `/forge:address-pr-comments`�
 Codex ではインストール後のスキル一覧から該当スキルを選ぶか、スキル名を指定して依頼する。
 
 - 「refactor-code で、請求計算と送信処理の責務を分けて。振る舞いは維持して」
+- 「tidy-code で、この関数の条件分岐を、次の修正に備えて読みやすくして」
 - 「commit-changes で、今回の修正を意味のある単位に分けてコミットして」
 - 「create-pr で、このブランチから main 向けの PR を作成して」
 - 「create-pr で、PR の説明文だけ下書きして」
