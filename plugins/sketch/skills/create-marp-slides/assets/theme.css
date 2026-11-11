@@ -1,0 +1,184 @@
+/* @theme sketch-slides */
+@import 'default';
+
+section {
+  background: #f7f8fa;
+  color: #172b3a;
+  font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  font-size: 30px;
+  line-height: 1.5;
+  padding: 88px 72px 64px;
+  place-content: start;
+  --color-highlight: #1d4ed8;
+  --title-rule: #1d4ed8;
+  --progress-height: 6px;
+  --progress-gap: 8px;
+  --progress-color: #1d4ed8;
+  --progress-track: #d9e1ee;
+}
+
+h1, h2, h3 {
+  color: #172b3a;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+h1 { font-size: 56px; }
+h2 { font-size: 44px; margin-bottom: 32px; }
+h3 { font-size: 34px; }
+section > :is(h1, h2, h3) { margin-top: 0; }
+section > :is(h1, h2, h3):not(:is(h1, h2, h3) ~ *) {
+  border-bottom: 4px solid var(--title-rule);
+  padding-bottom: 20px;
+  margin-bottom: 32px;
+}
+p, ul, ol { margin: 16px 0; }
+li + li { margin-top: 16px; }
+strong, a { color: #1d4ed8; }
+a { text-decoration: underline; }
+
+blockquote {
+  color: #172b3a;
+  border-left: 6px solid #1d4ed8;
+  background: #eaf0fd;
+  padding: 16px 24px;
+  margin: 24px 0;
+}
+
+/* The last blockquote is the takeaway only on slides with the message class. */
+section.message { padding-bottom: 192px; }
+section.message > blockquote:last-of-type {
+  position: absolute;
+  left: 72px;
+  right: 72px;
+  bottom: 64px;
+  height: 104px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 14px 24px;
+  font-size: 28px;
+  line-height: 1.35;
+  align-content: center;
+}
+section.message > blockquote:last-of-type > p { margin: 0; }
+section.message img { max-height: 280px; }
+
+.animated-flow { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin: 16px 0; }
+.animated-flow > img { width: 1120px; max-width: 100%; }
+.animated-flow .flow-motion { display: none; }
+.flow-control { order: 1; font-size: 18px; color: #526475; cursor: pointer; }
+.flow-control input { accent-color: #1d4ed8; }
+.animated-flow:has(input:checked) .flow-motion { display: block; }
+.animated-flow:has(input:checked) .flow-still { display: none; }
+@media print, (prefers-reduced-motion: reduce) {
+  .animated-flow .flow-control,
+  .animated-flow .flow-motion { display: none !important; }
+  .animated-flow .flow-still { display: block !important; }
+}
+
+table {
+  display: table;
+  width: 100%;
+  font-size: 26px;
+  border-collapse: collapse;
+}
+
+th, td { padding: 16px 20px; border-color: #ccd4de; }
+th { background: #eaf0fd; color: #172b3a; }
+tr, tr:nth-child(2n) { background: transparent; }
+
+pre {
+  background: #edf0f4;
+  border: 1px solid #ccd4de;
+  border-radius: 8px;
+  font-size: 24px;
+  line-height: 1.45;
+  padding: 24px;
+}
+
+code { font-family: 'SFMono-Regular', Consolas, monospace; }
+img { max-width: 100%; max-height: 440px; object-fit: contain; }
+header, footer { color: #526475; font-size: 18px; left: 72px; right: 72px; }
+header { top: 24px; }
+footer { bottom: 36px; }
+section::after { color: #526475; font-size: 18px; right: 32px; bottom: 36px; }
+
+.progress-marker {
+  position: absolute;
+  left: -72px;
+  right: -72px;
+  bottom: -30px;
+  height: 20px;
+  display: none;
+}
+.progress-marker img {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: calc(100% * (var(--progress-page) - 1.5) / var(--progress-count));
+  transform: translateX(-50%);
+  view-transition-name: progress-marker;
+}
+section.cover .progress-marker { display: none; }
+section.lead .progress-marker img { filter: brightness(0) invert(1); }
+section.summary .footer-note { visibility: hidden; }
+
+/* Progress excludes the first cover; pagination still counts it as page 1. */
+@supports (width: calc(attr(data-marpit-pagination type(<number>)) * 1%)) {
+  section {
+    --progress-page: attr(data-marpit-pagination type(<number>), 1);
+    --progress-count: max(1, attr(data-marpit-pagination-total type(<number>), 2) - 1);
+  }
+  section:not(.cover)[data-marpit-pagination] .progress-marker { display: block; }
+  section:not(.cover)[data-marpit-pagination]::before {
+    --segment-width: calc(100% / max(1, attr(data-marpit-pagination-total type(<number>)) - 1));
+    --progress: clamp(0%, calc(
+      100% * (attr(data-marpit-pagination type(<number>)) - 1)
+      / max(1, attr(data-marpit-pagination-total type(<number>)) - 1)
+    ), 100%);
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: var(--progress-height);
+    width: 100%;
+    background: linear-gradient(to right,
+      var(--progress-color) var(--progress), var(--progress-track) var(--progress));
+    mask-image: repeating-linear-gradient(to right,
+      transparent 0 calc(var(--progress-gap) / 2),
+      #000 calc(var(--progress-gap) / 2) calc(var(--segment-width) - var(--progress-gap) / 2),
+      transparent calc(var(--segment-width) - var(--progress-gap) / 2) var(--segment-width));
+    pointer-events: none;
+  }
+}
+
+section.lead {
+  background: #14283f;
+  color: #f7f8fa;
+  text-align: left;
+  --title-rule: #82b4ff;
+  --progress-color: #82b4ff;
+  --progress-track: #38506b;
+}
+
+section.lead h1 { font-size: 64px; }
+section.lead h1, section.lead h2, section.lead h3 { color: #f7f8fa; }
+section.lead strong, section.lead a { color: #a8caff; }
+section.lead header, section.lead footer, section.lead::after { color: #c5d3e2; }
+section.lead.message > blockquote:last-of-type {
+  background: #203b58;
+  border-left-color: #82b4ff;
+  color: #f7f8fa;
+}
+
+section.cover {
+  place-content: center;
+  text-align: left;
+  padding: 192px 72px;
+}
+
+section.cover > :is(h1, h2, h3):not(:is(h1, h2, h3) ~ *) {
+  border-bottom: none;
+  padding-bottom: 0;
+}

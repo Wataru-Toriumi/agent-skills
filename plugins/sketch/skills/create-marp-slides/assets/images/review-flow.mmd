@@ -1,0 +1,28 @@
+---
+config:
+  theme: base
+  themeVariables:
+    fontFamily: "Hiragino Sans, Noto Sans JP, Yu Gothic, sans-serif"
+    fontSize: "26px"
+    primaryColor: "#eaf0fd"
+    primaryTextColor: "#172b3a"
+    primaryBorderColor: "#1d4ed8"
+    lineColor: "#1d4ed8"
+    edgeLabelBackground: "#f7f8fa"
+  flowchart:
+    htmlLabels: false
+    wrappingWidth: 320
+    nodeSpacing: 40
+    rankSpacing: 48
+    curve: linear
+    stepDuration: 1.4
+---
+flowchart LR
+    purpose["目的を決める"] plan@--> split["差分を分ける"]
+    split check@--> review["検証・レビュー"]
+    review learn@--> reflect["振り返る"]
+    reflect repeat@-. "次の変更へ" .-> purpose
+    plan@{ step: 1 }
+    check@{ step: 2 }
+    learn@{ step: 3 }
+    repeat@{ step: 4 }

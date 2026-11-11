@@ -1,0 +1,2 @@
+/* Hide Mermaid's motion overlays without changing the diagram geometry. */
+.edge-step-dot, .edge-step-highlight { display: none !important; }
