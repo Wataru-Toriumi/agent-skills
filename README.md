@@ -11,7 +11,7 @@ Claude Code と Codex で使う自作プラグインのソースを管理する�
 | [forge](plugins/forge/README.md) | コードの整理からコミット・PR・レビューまでを支援する | `refactor-code`、`tidy-code`、`commit-changes`、`create-pr`、`review-code`、`address-pr-comments` |
 | [sketch](plugins/sketch/README.md) | 図やスライドを作り、描画結果を確認・改善する | `draw-mermaid`、`create-marp-slides` |
 | [probe](plugins/probe/README.md) | テスト設計・品質の検証を支援する | `plan-tests`、`design-tests`、`review-test-cases` |
-| [pulse](plugins/pulse/README.md) | 運用改善を支援する | `improve-operations` |
+| [pulse](plugins/pulse/README.md) | 障害対応と運用改善を支援する | `respond-to-incident`、`write-postmortem`、`improve-operations` |
 
 ## プラグインを追加する
 
