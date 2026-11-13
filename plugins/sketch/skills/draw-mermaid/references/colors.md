@@ -20,7 +20,7 @@
 
 ### 作図例の使い方
 
-[構成図](../examples/flowchart.md)、[ブロック図](../examples/block.md)、
+[構成図](../examples/flowchart.md)、[ブロック図](../examples/block.md)、[循環図](../examples/cycle.md)、
 [シーケンス図](../examples/sequence.md)、[状態遷移図](../examples/state.md)、[ER 図](../examples/er.md)、[クラス図](../examples/class.md) は、明るい背景向けの配色・余白をコードブロック内に含む。
 コピーするときは `config` も含め、掲載幅に合わせて間隔を調整する。
 暗い背景や既存テーマへ合わせる場合は、例の `theme`・`themeVariables` を置き換える。
