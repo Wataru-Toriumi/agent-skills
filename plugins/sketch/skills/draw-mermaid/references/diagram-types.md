@@ -38,7 +38,7 @@ usecase-beta は Mermaid 12以降のベータ構文。未対応なら flowchart 
 | --- | --- | --- |
 | 作業期間と依存 | [gantt](../examples/gantt.md) | 開始日、期間、前提作業、節目 |
 | 出来事の順序 | [timeline](../examples/timeline.md) | 時期、出来事、計画と実績の区別 |
-| Gitの分岐と統合 | [gitGraph](../examples/gitgraph.md) | ブランチ、コミット、統合先 |
+| Gitの分岐と統合 | [マージ](../examples/gitgraph.md)、[cherry-pick](../examples/gitgraph-cherry-pick.md) | ブランチ、コミット、親子関係、取り込み先 |
 | 二つの軸による比較 | [quadrantChart](../examples/quadrant.md) | 軸の定義、評価根拠、位置 |
 | 数量の比較や推移 | [xychart](../examples/xychart.md) | 対象、期間、単位、尺度 |
 | 全体に対する内訳 | [pie](../examples/pie.md) | 母数、重複しない分類、値 |

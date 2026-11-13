@@ -34,6 +34,7 @@ Claude Code では `/sketch:<スキル名>`、Codex ではスキル一覧やス�
 - 「試行計画をガントチャートにして、作業の依存を示して」
 - 「予約する利用者のジャーニーと、役割ごとのユースケースを図にして」
 - 「C4 の Context と Container で、システムの境界と内部構成を整理して」
+- 「このブランチのマージと cherry-pick を Git graph で説明して」
 
 図種は [用途別の選び方](skills/draw-mermaid/references/diagram-types.md)を参照する。各パターンに最小例と使い分けを用意している。
 
