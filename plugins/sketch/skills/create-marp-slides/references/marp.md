@@ -85,11 +85,12 @@ HTMLでは同じ `view-transition-name` を持つ画像がページ間を滑ら�
 図の比率を保ち、表示幅と高さを確認する。背景に写真を置く場合の例は `![bg right:40%](images/photo.jpg)`。
 背景画像は切り抜かれることがあるため、図表のラベルを隠さない。必要なら `bg contain` を使う。
 画像の説明は代替テキストに、判断に必要な結論や出典は見える本文にも残す。
+図のラベルにも [改行と折り返し](design.md#改行と折り返し)の基準を適用し、ノード・矢印・グループ名を確認する。図単体と埋め込み後の HTML・PDF の両方で調べ、不自然な改行は図のソース側で文言・幅・配置を調整して再描画する。
 
 Mermaid は先に画像化する。独自の HTML や JavaScript を埋め込む前に、その機能が利用先で対応しているかを確かめる。
 
 ひな形には [Mermaid ソース](../assets/images/review-flow.mmd)、[静止 SVG](../assets/images/review-flow.svg)、[動的 SVG](../assets/images/review-flow-animated.svg) を同梱している。
-出力先でも `images/` の配置を保つ。図を変えたら両方の SVG と HTML・PDF を再生成する。
+編集用ソースでは `images/` の配置を保つ。図を変えたら両方の SVG と HTML・PDF を再生成し、[配布用 HTML に埋め込む](standalone-html.md)。
 Mermaid 12.3以降に対応した CLI で、デッキのディレクトリから次のように描画する。
 
 ```sh
