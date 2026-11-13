@@ -13,9 +13,12 @@
 | 型の責務と関係 | [classDiagram](../examples/class.md) | 属性、操作、継承・関連の意味 |
 | 配置を揃えた構成 | [block](../examples/block.md) | 層、まとまり、接続 |
 | サービスと実行基盤の接続 | [architecture-beta](../examples/architecture.md) | サービス、リソース、配置境界 |
+| システムと利用者・外部との関係 | [C4Context](../examples/c4-context.md) | 対象システム、外部システム、利用者 |
+| システム内部のアプリとデータストア | [C4Container](../examples/c4-container.md) | 責務、技術、接続、システム境界 |
 
 classDiagram は型のモデル、erDiagram はデータのモデルに使う。配置を指定したいなら block、接続や分岐を追わせたいなら flowchart を起点にする。
 Architecture はベータ。掲載先が未対応なら flowchart、または対応環境で描画した SVG を使う。
+C4 の粒度と専用構文の注意点は [C4 の使い分け](c4.md) を参照する。
 
 ## 要求と利用体験
 
@@ -23,8 +26,8 @@ Architecture はベータ。掲載先が未対応なら flowchart、または対
 | --- | --- | --- |
 | 要求と実現・検証の対応 | [requirementDiagram](../examples/requirement.md) | 要求ID、関係、検証方法 |
 | 利用者の体験と困りごと | [journey](../examples/journey.md) | 行動、担当、評価の根拠 |
-| 論点や関心の分類 | [mindmap](../examples/mindmap.md) | 中心テーマ、分類の階層 |
 | 誰がシステムで何を達成するか | [usecase-beta](../examples/usecase.md) | アクター、目的、システム境界、関連 |
+| 論点や関心の分類 | [mindmap](../examples/mindmap.md) | 中心テーマ、分類の階層 |
 
 体験の推移は journey、アクターの目的は usecase、処理の順序は sequenceDiagram にする。mindmap の枝を依存関係や実行順序として扱わない。
 usecase-beta は Mermaid 12以降のベータ構文。未対応なら flowchart での近似か描画済み SVG を使う。
@@ -45,5 +48,5 @@ usecase-beta は Mermaid 12以降のベータ構文。未対応なら flowchart 
 
 ## 他の図種が必要な場合
 
-[公式の図種一覧](https://mermaid.js.org/intro/)には、Sankey、Kanban、C4 などもある。
+[公式の図種一覧](https://mermaid.js.org/intro/)には、Sankey、Kanban などもある。
 選んだ図種の公式資料で構文・ベータ扱い・追加依存を確認し、利用先が未対応なら対応する図種か描画済み画像へ切り替える。
