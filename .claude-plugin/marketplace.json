@@ -15,6 +15,10 @@
     {
       "name": "sketch",
       "source": "./plugins/sketch"
+    },
+    {
+      "name": "probe",
+      "source": "./plugins/probe"
     }
   ]
 }
