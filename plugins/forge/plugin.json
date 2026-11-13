@@ -1,6 +1,6 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "forge",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "変更をコミットし、PR とレビューにつなぐ。日常の開発フローを支援する。"
 }

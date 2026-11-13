@@ -11,7 +11,43 @@
 | [write-postmortem](skills/write-postmortem/SKILL.md) | 障害の経緯と寄与要因から、再発・影響を減らす対策をまとめる |
 | [improve-operations](skills/improve-operations/SKILL.md) | 運用負荷や障害の傾向から、改善の優先度と効果の測り方を決める |
 
-各スキルは単独で使える。障害対応の記録を振り返りへ渡し、改善結果を監視や手順へ反映できる。
+## 想定実行順序
+
+障害時は `respond-to-incident`、定期的な見直しは、日常の運用記録をもとに `improve-operations` から始められる。
+
+```mermaid
+---
+config:
+  theme: base
+  look: classic
+  fontFamily: sans-serif
+  themeVariables:
+    primaryColor: "#F1F5F9"
+    primaryTextColor: "#0F172A"
+    primaryBorderColor: "#64748B"
+    lineColor: "#64748B"
+    tertiaryColor: "#F8FAFC"
+    clusterBkg: "#F8FAFC"
+    clusterBorder: "#CBD5E1"
+    edgeLabelBackground: "#FFFFFF"
+  flowchart:
+    wrappingWidth: 300
+    curve: linear
+    nodeSpacing: 32
+    rankSpacing: 40
+---
+flowchart TD
+    monitoring("監視・初動を設計<br/>plan-monitoring")
+    incident("切り分け・復旧確認<br/>respond-to-incident")
+    postmortem("経緯と要因を振り返る<br/>write-postmortem")
+    improve("改善の優先度を決める<br/>improve-operations")
+    monitoring -. 障害時 .-> incident
+    incident -->|復旧後| postmortem
+    postmortem --> improve
+    improve -->|監視を見直す場合| monitoring
+```
+
+改善結果は監視や対応手順へ反映する。監視設計だけの依頼から本番設定の適用や常時監視へは進まない。
 
 ## 導入
 
