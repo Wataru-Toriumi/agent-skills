@@ -1,5 +1,5 @@
 {
   "name": "ink",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "要求の深掘り、PRD・計画項目・Design Doc・ADR の作成と更新、シナリオに基づく設計レビューを支援する。"
 }

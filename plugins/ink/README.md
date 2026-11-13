@@ -18,6 +18,43 @@
 書式と保存先はユーザーの指定・リポジトリの慣例を優先する。チャット上の草案はファイルに保存しない。
 文書作成スキルの `assets/` に Markdown のひな形を同梱している。
 
+## 想定実行順序
+
+要求整理から設計検証までの一例。点線は作業項目・判断記録への分岐を示す。必要なスキルから単独で使える。
+
+```mermaid
+---
+config:
+  theme: base
+  look: classic
+  fontFamily: sans-serif
+  themeVariables:
+    primaryColor: "#F1F5F9"
+    primaryTextColor: "#0F172A"
+    primaryBorderColor: "#64748B"
+    lineColor: "#64748B"
+    tertiaryColor: "#F8FAFC"
+    clusterBkg: "#F8FAFC"
+    clusterBorder: "#CBD5E1"
+    edgeLabelBackground: "#FFFFFF"
+  flowchart:
+    wrappingWidth: 300
+    curve: linear
+    nodeSpacing: 32
+    rankSpacing: 40
+---
+flowchart TD
+    clarify("要求を深掘り<br/>clarify-requirements") --> prd("要求を文書化<br/>write-prd")
+    prd --> design("実現方法を設計<br/>write-design-doc")
+    design --> review("設計を検証<br/>review-design")
+    prd -.-> items("作業項目へ分割<br/>write-work-item")
+    design -.-> adr("選択理由を残す<br/>write-adr")
+    classDef optional fill:#FFFFFF,stroke:#64748B,color:#0F172A,stroke-dasharray:4 3
+    class items,adr optional
+```
+
+レビュー結果に応じて設計を見直し、作業項目と設計も必要に応じて行き来する。ADR は検討中にも作成でき、レビューの完了を採用の合意とは扱わない。
+
 ## 出力の基本構成
 
 | 文書 | 基本構成 |
