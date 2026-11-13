@@ -19,6 +19,10 @@
     {
       "name": "probe",
       "source": "./plugins/probe"
+    },
+    {
+      "name": "pulse",
+      "source": "./plugins/pulse"
     }
   ]
 }
