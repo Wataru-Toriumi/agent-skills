@@ -17,6 +17,45 @@
 
 コミットには Git、PR の操作には利用環境の GitHub 接続ツールまたは CLI と認証が必要。
 
+## 想定実行順序
+
+コード整理は必要な場合に選ぶ。`create-pr` はセルフレビューと必要なコミットを含むため、直接依頼できる。
+
+```mermaid
+---
+config:
+  theme: base
+  look: classic
+  fontFamily: sans-serif
+  themeVariables:
+    primaryColor: "#F1F5F9"
+    primaryTextColor: "#0F172A"
+    primaryBorderColor: "#64748B"
+    lineColor: "#64748B"
+    tertiaryColor: "#F8FAFC"
+    clusterBkg: "#F8FAFC"
+    clusterBorder: "#CBD5E1"
+    edgeLabelBackground: "#FFFFFF"
+  flowchart:
+    wrappingWidth: 300
+    curve: linear
+    nodeSpacing: 32
+    rankSpacing: 40
+---
+flowchart TD
+    tidy("局所的に整える<br/>tidy-code")
+    refactor("責務・依存を整理<br/>refactor-code")
+    subgraph pr["create-pr：PR作成・更新"]
+        review("セルフレビュー<br/>review-code") --> commit("変更をコミット<br/>commit-changes")
+        commit --> publish["push・PR作成／更新"]
+    end
+    tidy --> pr
+    refactor --> pr
+    publish -->|コメントを受けたら| address("指摘を確認・対応<br/>address-pr-comments")
+```
+
+レビューやコミットだけでも使える。指摘への対応で修正した場合も、検証・セルフレビューし、依頼範囲でコミット・pushする。
+
 ## 導入
 
 利用するツールでマーケットプレイスを登録し、インストールする。
