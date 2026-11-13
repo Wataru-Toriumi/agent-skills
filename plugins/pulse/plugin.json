@@ -1,0 +1,6 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "pulse",
+  "version": "0.1.0",
+  "description": "監視設計・障害対応・振り返りを通じて、サービスの運用を改善する。"
+}
