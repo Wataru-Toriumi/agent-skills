@@ -1,6 +1,6 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "sketch",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Mermaid の図と Marp のスライドを作る。構成・デザイン・描画確認と改善を支援する。"
 }
