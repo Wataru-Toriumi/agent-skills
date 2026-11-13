@@ -10,7 +10,7 @@ pnpm のプロジェクトへ導入する場合は `pnpm add -D @marp-team/marp-
 
 ```sh
 pnpm exec marp --version
-pnpm exec marp slides.md --html --theme-set ./theme.css -o slides.html
+pnpm exec marp slides.md --html --theme-set ./theme.css -o slides.raw.html
 pnpm exec marp slides.md --html --theme-set ./theme.css --pdf -o slides.pdf
 pnpm exec marp slides.md --html --theme-set ./theme.css --images png -o preview.png
 ```
@@ -21,7 +21,7 @@ PDF・PPTX・画像への変換には対応ブラウザーが必要。画像生�
 
 ローカル画像が必要な変換では、Markdown・CSS の参照先を確認した上で `--allow-local-files` を付ける。
 画像が出ない原因を解決するために、資料を無断で外部へアップロードしない。
-HTML を別の場所へ渡す場合は画像も同じ相対配置で渡し、受け渡し先で読み込めるか確認する。
+`slides.raw.html` は画像を外部参照する中間ファイル。[HTML の単一ファイル化](standalone-html.md)で配布用の `slides.html` を作る。
 
 ## 出力形式の選択
 
@@ -32,7 +32,7 @@ HTML はフェードとページ操作、PDF は静止した内容とレイア�
 | 形式 | 用途 | 確認すること |
 | --- | --- | --- |
 | Markdown・CSS・画像 | 継続的な編集 | テーマ登録、相対パス、必要なフォント |
-| HTML | ブラウザーでの発表 | 画像とフォント、表示・ページ送り |
+| HTML | 1ファイルで共有し、ブラウザーで発表 | オフラインでの全ページ表示と動作 |
 | PDF | 固定した見た目での配布 | ページ数、文字や図の欠け、リンク |
 | PPTX | PowerPoint 等での再生 | 標準は画像ベースで、文字や図形を個別編集する用途に向かない |
 

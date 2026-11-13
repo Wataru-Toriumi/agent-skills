@@ -61,6 +61,7 @@ Markdown の Mermaid ブロックや `.mmd` ソースを出力し、必要に応
 
 日本語向けの [テーマ](skills/create-marp-slides/assets/theme.css) と [ひな形](skills/create-marp-slides/assets/deck-template.md) を同梱する。
 構成と見た目を整え、編集用ソースと、発表用のフェード付き HTML・配布用の静止 PDF を出力する。形式の指定があればそちらを優先する。
+HTML は図やアイコンを埋め込んだ1ファイルとして共有できる。ダウンロードして対応ブラウザーで開くと、オフラインでもページ操作やアニメーションが動く。
 書き出しには利用環境の Marp を使い、PDF・画像などには対応ブラウザーも必要。
 標準の PPTX は画像ベースになる。環境と出力形式の詳細は [描画と出力](skills/create-marp-slides/references/rendering.md) を参照する。
 

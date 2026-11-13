@@ -89,7 +89,7 @@ HTMLでは同じ `view-transition-name` を持つ画像がページ間を滑ら�
 Mermaid は先に画像化する。独自の HTML や JavaScript を埋め込む前に、その機能が利用先で対応しているかを確かめる。
 
 ひな形には [Mermaid ソース](../assets/images/review-flow.mmd)、[静止 SVG](../assets/images/review-flow.svg)、[動的 SVG](../assets/images/review-flow-animated.svg) を同梱している。
-出力先でも `images/` の配置を保つ。図を変えたら両方の SVG と HTML・PDF を再生成する。
+編集用ソースでは `images/` の配置を保つ。図を変えたら両方の SVG と HTML・PDF を再生成し、[配布用 HTML に埋め込む](standalone-html.md)。
 Mermaid 12.3以降に対応した CLI で、デッキのディレクトリから次のように描画する。
 
 ```sh
