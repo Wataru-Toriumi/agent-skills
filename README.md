@@ -10,7 +10,7 @@ Claude Code と Codex で使う自作プラグインのソースを管理する�
 | [ink](plugins/ink/README.md) | 要求整理・文書作成・設計レビューを支援する | `clarify-requirements`、`write-prd`、`write-work-item`、`write-design-doc`、`write-adr`、`review-design` |
 | [forge](plugins/forge/README.md) | コードの整理からコミット・PR・レビューまでを支援する | `refactor-code`、`tidy-code`、`commit-changes`、`create-pr`、`review-code`、`address-pr-comments` |
 | [sketch](plugins/sketch/README.md) | 図やスライドを作り、描画結果を確認・改善する | `draw-mermaid`、`create-marp-slides` |
-| [probe](plugins/probe/README.md) | テスト設計・品質の検証を支援する | `plan-tests`、`design-tests` |
+| [probe](plugins/probe/README.md) | テスト設計・品質の検証を支援する | `plan-tests`、`design-tests`、`review-test-cases` |
 
 ## プラグインを追加する
 
