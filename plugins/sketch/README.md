@@ -36,7 +36,7 @@ Claude Code では `/sketch:<スキル名>`、Codex ではスキル一覧やス�
 - 「C4 の Context と Container で、システムの境界と内部構成を整理して」
 - 「このブランチのマージと cherry-pick を Git graph で説明して」
 
-図種は [用途別の選び方](skills/draw-mermaid/references/diagram-types.md)を参照する。各パターンに最小例と使い分けを用意している。
+図種は [用途別の選び方](skills/draw-mermaid/references/diagram-types.md)を参照する。構成図などには、配色・余白の設定を含む作図例を用意している。
 
 Markdown の Mermaid ブロックや `.mmd` ソースを出力し、必要に応じて SVG / PNG を生成する。
 描画には利用先のプレビューまたは Mermaid CLI などを使う。CLI・ブラウザー・MCP サーバーは同梱せず、自動導入しない。

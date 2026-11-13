@@ -7,10 +7,30 @@
 小文字の `end` はブロック終端と衝突するため、ノード ID やそのままのラベルに使わない。
 
 ```mermaid
+---
+config:
+  theme: base
+  look: classic
+  fontFamily: sans-serif
+  themeVariables:
+    primaryColor: "#F1F5F9"
+    primaryTextColor: "#0F172A"
+    primaryBorderColor: "#64748B"
+    lineColor: "#64748B"
+    secondaryColor: "#F8FAFC"
+    tertiaryColor: "#FFFFFF"
+    clusterBkg: "#F8FAFC"
+    clusterBorder: "#CBD5E1"
+    edgeLabelBackground: "#FFFFFF"
+  flowchart:
+    curve: linear
+    nodeSpacing: 32
+    rankSpacing: 48
+---
 flowchart LR
     applicant["申請者"]
     subgraph system["申請システム"]
-        api["API：閲覧権限を判定"]
+        api("申請API<br/>閲覧権限を判定")
         store[("申請データ")]
     end
     applicant -->|一覧を取得| api
@@ -20,6 +40,7 @@ flowchart LR
 これは依存関係の図であり、認証や失敗時の処理順序を網羅した図ではない。
 構成を説明する線に全応答を追加して煩雑になる場合は、実行時の図を別にする。
 `subgraph` 内の向きは外部との接続に影響されるため、方向指定だけで配置を固定できるとは考えない。
+外枠は境界、角丸は処理、円柱はデータに使い、薄い背景と余白で役割を分ける。
 
 ## 構文の確認先
 

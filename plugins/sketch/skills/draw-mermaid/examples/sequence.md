@@ -6,7 +6,26 @@
 失敗分岐は設計にあるものを描き、エラーコードや再試行を推測で追加しない。
 
 ```mermaid
+---
+config:
+  theme: base
+  look: classic
+  fontFamily: sans-serif
+  themeVariables:
+    primaryColor: "#F1F5F9"
+    primaryTextColor: "#0F172A"
+    primaryBorderColor: "#64748B"
+    lineColor: "#64748B"
+    secondaryColor: "#F8FAFC"
+    tertiaryColor: "#FFFFFF"
+    sequenceNumberColor: "#FFFFFF"
+  sequence:
+    mirrorActors: false
+    actorMargin: 64
+    messageMargin: 36
+---
 sequenceDiagram
+    autonumber
     actor Applicant as 申請者
     participant API as 申請API
     participant Store as 申請データ
@@ -19,6 +38,8 @@ sequenceDiagram
         API-->>Applicant: 閲覧を拒否
     end
 ```
+
+参加者は上部だけに置き、番号とメッセージ間の余白で読み順を示す。長い応答待ちや途中から読む図では、下部の参加者も表示する。
 
 ## 構文の確認先
 

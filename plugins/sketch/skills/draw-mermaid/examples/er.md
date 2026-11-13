@@ -6,7 +6,24 @@
 概念モデルなら属性は省いてよい。物理モデルならキーと参照先を揃え、見栄えのために制約を変更しない。
 
 ```mermaid
+---
+config:
+  theme: base
+  look: classic
+  fontFamily: sans-serif
+  themeVariables:
+    primaryColor: "#F1F5F9"
+    primaryTextColor: "#0F172A"
+    primaryBorderColor: "#64748B"
+    lineColor: "#64748B"
+    secondaryColor: "#F8FAFC"
+    tertiaryColor: "#FFFFFF"
+  er:
+    nodeSpacing: 40
+    rankSpacing: 64
+---
 erDiagram
+    direction LR
     APPLICANT ||--o{ APPLICATION : submits
     APPLICANT {
         string id PK
@@ -18,6 +35,7 @@ erDiagram
 ```
 
 この例は「申請者は申請を0件以上持ち、各申請の申請者は必ず1人」という前提。
+エンティティを横に並べ、関連名と多重度を読める間隔を取る。属性が多いときは図を用途別に分ける。
 
 ## 構文の確認先
 

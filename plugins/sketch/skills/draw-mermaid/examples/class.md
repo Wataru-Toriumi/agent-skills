@@ -4,7 +4,24 @@
 関連を継承や合成に置き換えない。多重度や所有関係は設計で確認できるものだけを書く。
 
 ```mermaid
+---
+config:
+  theme: base
+  look: classic
+  fontFamily: sans-serif
+  themeVariables:
+    primaryColor: "#F1F5F9"
+    primaryTextColor: "#0F172A"
+    primaryBorderColor: "#64748B"
+    lineColor: "#64748B"
+    secondaryColor: "#F8FAFC"
+    tertiaryColor: "#FFFFFF"
+  class:
+    nodeSpacing: 40
+    rankSpacing: 64
+---
 classDiagram
+    direction LR
     class Application["申請"] {
         +String status
         +submit()
@@ -18,6 +35,7 @@ classDiagram
 ```
 
 メソッドや属性は問いに必要なものへ絞る。実装クラスの全メンバーを列挙しない。
+関連の向きを左から右に揃え、型名・メンバー・多重度を同じ行に詰め込まない。
 
 ## 構文の確認先
 

@@ -18,6 +18,16 @@
 
 ## 図全体のテーマ
 
+### 作図例の使い方
+
+[構成図](../examples/flowchart.md)、[ブロック図](../examples/block.md)、
+[シーケンス図](../examples/sequence.md)、[状態遷移図](../examples/state.md)、[ER 図](../examples/er.md)、[クラス図](../examples/class.md) は、明るい背景向けの配色・余白をコードブロック内に含む。
+コピーするときは `config` も含め、掲載幅に合わせて間隔を調整する。
+暗い背景や既存テーマへ合わせる場合は、例の `theme`・`themeVariables` を置き換える。
+図内の設定が優先されるため、CLI の `-c` だけで例の色を上書きできるとは考えない。
+
+### テーマを適用する
+
 - 明るい背景には [light 設定](../assets/theme-light.json)、暗い背景には [dark 設定](../assets/theme-dark.json) を起点にする。
 - Mermaid CLI では JSON を `-c` に指定する。`themeVariables.background` だけで出力画像の背景が変わるとは考えず、画像の背景は CLI の `-b` など描画側でも揃える。
 - Markdown へ埋め込む場合は、選んだ JSON の内容を図の YAML frontmatter の `config` 配下へ変換して含める。JSON ファイルへのパスだけを書いても読み込まれない。テーマ変更には `theme: base` を使い、色値は引用符で囲んだ16進表記にする。
