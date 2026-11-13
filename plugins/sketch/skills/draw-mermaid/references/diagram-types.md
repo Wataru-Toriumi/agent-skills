@@ -24,8 +24,10 @@ Architecture はベータ。掲載先が未対応なら flowchart、または対
 | 要求と実現・検証の対応 | [requirementDiagram](../examples/requirement.md) | 要求ID、関係、検証方法 |
 | 利用者の体験と困りごと | [journey](../examples/journey.md) | 行動、担当、評価の根拠 |
 | 論点や関心の分類 | [mindmap](../examples/mindmap.md) | 中心テーマ、分類の階層 |
+| 誰がシステムで何を達成するか | [usecase-beta](../examples/usecase.md) | アクター、目的、システム境界、関連 |
 
-処理の順序は sequenceDiagram、体験の良し悪しは journey にする。mindmap の枝を依存関係や実行順序として扱わない。
+体験の推移は journey、アクターの目的は usecase、処理の順序は sequenceDiagram にする。mindmap の枝を依存関係や実行順序として扱わない。
+usecase-beta は Mermaid 12以降のベータ構文。未対応なら flowchart での近似か描画済み SVG を使う。
 
 ## 計画と比較
 

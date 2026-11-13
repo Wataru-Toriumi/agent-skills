@@ -1,5 +1,5 @@
 {
   "name": "sketch",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Mermaid の図と Marp のスライドを作る。構成・デザイン・描画確認と改善を支援する。"
 }
