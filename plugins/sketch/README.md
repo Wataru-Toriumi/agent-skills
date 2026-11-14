@@ -1,6 +1,6 @@
 # sketch
 
-図やスライドで伝える、Claude Code / Codex 用プラグイン。
+図・スライド・HTMLの説明ページで伝える、Claude Code / Codex 用プラグイン。
 
 変更履歴は [GitHub Releases](https://github.com/Wataru-Toriumi/agent-skills/releases?q=sketch) を参照する。
 
@@ -8,10 +8,11 @@
 | --- | --- |
 | [draw-mermaid](skills/draw-mermaid/SKILL.md) | Mermaid の図種を選び、作図・描画確認する |
 | [create-marp-slides](skills/create-marp-slides/SKILL.md) | Marp の構成・デザインを整え、全ページを描画確認する |
+| [explain-visually](skills/explain-visually/SKILL.md) | 図表と短い説明を組み合わせ、単一HTMLで共有する |
 
 ## 想定実行順序
 
-図とスライドはそれぞれ単独で作れる。スライドに図が必要な場合は、描画済みの図を組み込む。
+成果物に合うスキルから始める。スライドやHTMLにMermaidの図が必要なら、描画した図を組み込む。
 
 ```mermaid
 ---
@@ -38,9 +39,12 @@ flowchart TD
     purpose{"作りたい成果物"}
     purpose -->|図| diagram("作図・描画確認<br/>draw-mermaid")
     purpose -->|スライド| slides("構成・作成・描画確認<br/>create-marp-slides")
+    purpose -->|説明ページ| explain("図表・説明・操作確認<br/>explain-visually")
     diagram --> rendered["Mermaidソース・SVG／PNG"]
     rendered -. 図が必要な場合 .-> slides
+    rendered -. Mermaidを使う場合 .-> explain
     slides --> output["発表用HTML・配布用PDF"]
+    explain --> page["共有用の単一HTML"]
 ```
 
 図のソースのみ、PDFのみなど、指定があれば出力形式を合わせる。
@@ -107,6 +111,15 @@ Markdown の Mermaid ブロックや `.mmd` ソースを出力し、必要に応
 HTML は図やアイコンを埋め込んだ1ファイルとして共有できる。ダウンロードして対応ブラウザーで開くと、オフラインでもページ操作やアニメーションが動く。
 書き出しには利用環境の Marp を使い、PDF・画像などには対応ブラウザーも必要。
 標準の PPTX は画像ベースになる。環境と出力形式の詳細は [描画と出力](skills/create-marp-slides/references/rendering.md) を参照する。
+
+## HTMLの説明ページ
+
+- 「explain-visually で、この処理の流れを段階ごとに確認できるHTMLにして」
+- 「この二つの設計案の違いと制約を、図と比較表で説明して」
+
+[ひな形](skills/explain-visually/assets/explanation.html) をもとに、図表・説明・出典を一つのページにまとめる。
+HTMLだけをダウンロードしてブラウザーで開けるようにし、オフライン・狭い画面・キーボード操作・印刷時の表示を確認する。
+レビュー結果を受け取る場合は、指摘と根拠を保って説明する。表示を整えることと、要求や設計の妥当性を判断することは分ける。
 
 ## 他のプラグインから利用する
 
