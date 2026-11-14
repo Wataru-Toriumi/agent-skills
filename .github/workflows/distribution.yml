@@ -1,0 +1,30 @@
+name: Validate distribution
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  distribution:
+    name: Distribution validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: jdx/mise-action@v5
+      - run: mise run setup
+      - name: Check marketplace, manifests, skills, and references
+        run: mise exec -- pnpm plugin:check
+      - name: Validate with Claude Code (pinned, no API authentication required)
+        run: |
+          mise exec -- pnpm dlx @anthropic-ai/claude-code@2.1.325 plugin validate .
+          for plugin in templates/plugin plugins/*; do
+            mise exec -- pnpm dlx @anthropic-ai/claude-code@2.1.325 plugin validate "$plugin"
+          done

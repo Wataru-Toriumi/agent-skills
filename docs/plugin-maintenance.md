@@ -86,3 +86,16 @@ PR でのバージョン更新漏れ（変更前後で番号が上がったか�
 `Validate (Node 24.12.0)` と `Validate (Node 26)` を必須チェックに指定する。
 
 各変更の検証結果は PR と GitHub Actions の実行結果で確認する。
+
+## 配布物の検証
+
+`pnpm plugin:check` はカタログと実ディレクトリの対応・重複、両マニフェストの
+名前・版・説明、SKILLの必須項目、Markdownの相対参照を検査する。
+参照先の欠落、Plugin外への逸脱、配布ディレクトリ内のシンボリックリンクはエラーになる。
+コード例内のリンクと、出力先で置換する `assets/` 内のリンクは参照検査の対象外。
+外部URLの疎通とアンカーの存在は検査しない。
+
+`Distribution validation` はこれに加えて、固定版Claude Codeでカタログ・各Plugin・
+テンプレートに `claude plugin validate` を実行する。API認証は不要。
+著者情報など任意メタデータの警告は表示し、構文・スキーマのエラーで失敗する。
+ホスト検証の範囲は [Claude Codeの検証仕様](https://code.claude.com/docs/en/plugins/cli-reference#plugin-validate) を参照する。

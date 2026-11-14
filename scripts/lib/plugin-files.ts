@@ -73,6 +73,10 @@ export function readPluginDirectory(directory: string, expectedName?: string): P
   if (claude.manifest.name !== name || claude.manifest.version !== version) {
     throw new Error(`Manifest name/version mismatch in ${directory}. Fix the mismatch before versioning.`);
   }
+  if (typeof portable.manifest.description !== 'string' || !portable.manifest.description.trim()
+    || claude.manifest.description !== portable.manifest.description) {
+    throw new Error(`Manifest description missing or mismatch in ${directory}.`);
+  }
   return { directory, name, version, manifests: [portable, claude] };
 }
 

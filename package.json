@@ -10,12 +10,14 @@
     "lint:text": "textlint --config .textlintrc.json \"**/*.md\"",
     "plugin:new": "node scripts/new-plugin.ts",
     "plugin:version": "node scripts/version-plugin.ts",
-    "plugin:check": "node scripts/version-plugin.ts --check",
+    "plugin:check": "node scripts/check-plugins.ts",
     "plugin:release": "node scripts/publish-releases.ts",
     "test": "node --test tests/*.test.ts"
   },
   "devDependencies": {
+    "mdast-util-from-markdown": "2.0.2",
     "textlint": "15.8.0",
-    "textlint-rule-ja-no-redundant-expression": "4.0.1"
+    "textlint-rule-ja-no-redundant-expression": "4.0.1",
+    "yaml": "2.8.1"
   }
 }
