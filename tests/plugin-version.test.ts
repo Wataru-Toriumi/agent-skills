@@ -1,18 +1,22 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { spawnSync } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
-import { test } from 'node:test';
 import type { TestContext } from 'node:test';
-import { checkPluginVersions, createPlugin, versionPlugin } from '../scripts/lib/plugin-commands.ts';
+import { test } from 'node:test';
+import { fileURLToPath } from 'node:url';
+import {
+  checkPluginVersions,
+  createPlugin,
+  versionPlugin,
+} from '../scripts/lib/plugin-commands.ts';
 import { nextVersion } from '../scripts/lib/releases.ts';
 
 const repository = fileURLToPath(new URL('../', import.meta.url));
 const manifests = ['plugin.json', '.claude-plugin/plugin.json'];
 
-function fixture(t: TestContext): string {
+const fixture = (t: TestContext): string => {
   const root = fs.mkdtempSync(join(tmpdir(), 'plugin-version-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   for (const path of ['scripts', 'templates', 'package.json']) {
@@ -20,27 +24,34 @@ function fixture(t: TestContext): string {
   }
   fs.mkdirSync(join(root, 'plugins'));
   fs.mkdirSync(join(root, '.claude-plugin'));
-  fs.writeFileSync(join(root, '.claude-plugin/marketplace.json'), JSON.stringify({
-    name: 'test-marketplace', owner: { name: 'test' }, plugins: [],
-  }));
+  fs.writeFileSync(
+    join(root, '.claude-plugin/marketplace.json'),
+    JSON.stringify({
+      name: 'test-marketplace',
+      owner: { name: 'test' },
+      plugins: [],
+    }),
+  );
   return root;
-}
+};
 
-function run(root: string, script: string, ...args: string[]) {
+const run = (root: string, script: string, ...args: string[]) => {
   return spawnSync(process.execPath, [join(root, 'scripts', script), ...args], {
-    cwd: tmpdir(), encoding: 'utf8', timeout: 10000,
+    cwd: tmpdir(),
+    encoding: 'utf8',
+    timeout: 10000,
   });
-}
+};
 
-function addPlugin(root: string, name = 'sample'): string {
+const addPlugin = (root: string, name = 'sample'): string => {
   const result = run(root, 'new-plugin.ts', name, '--description', 'テスト用プラグイン');
   assert.equal(result.status, 0, result.stderr);
   return join(root, 'plugins', name);
-}
+};
 
-function readJson(path: string) {
+const readJson = (path: string) => {
   return JSON.parse(fs.readFileSync(path, 'utf8'));
-}
+};
 
 test('patch/minor/major increment independently and reset the lower components', () => {
   assert.equal(nextVersion('1.2.3', 'patch'), '1.2.4');
@@ -48,7 +59,15 @@ test('patch/minor/major increment independently and reset the lower components',
   assert.equal(nextVersion('1.2.3', 'major'), '2.0.0');
   assert.equal(nextVersion('0.1.0', 'major'), '1.0.0');
   assert.equal(nextVersion('1.0.9007199254740992', 'patch'), '1.0.9007199254740993');
-  for (const version of ['01.2.3', '1.2', 'v1.2.3', '1.2.3-beta.1', '1.2.3+build', '-1.2.3', '1.2.3\n']) {
+  for (const version of [
+    '01.2.3',
+    '1.2',
+    'v1.2.3',
+    '1.2.3-beta.1',
+    '1.2.3+build',
+    '-1.2.3',
+    '1.2.3\n',
+  ]) {
     assert.throws(() => nextVersion(version, 'patch'), /Unsupported version/);
   }
 });
@@ -69,10 +88,16 @@ test('updates only the target manifests and preserves existing files', (t) => {
     assert.equal(readJson(join(other, path)).version, '0.1.0');
     assert.equal(readJson(join(root, 'templates/plugin', path)).version, '0.1.0');
   }
-  assert.equal(fs.readFileSync(join(root, '.claude-plugin/marketplace.json'), 'utf8'), catalogBefore);
+  assert.equal(
+    fs.readFileSync(join(root, '.claude-plugin/marketplace.json'), 'utf8'),
+    catalogBefore,
+  );
   versionPlugin(root, { name: 'sample', release: 'minor' });
   assert.equal(fs.readFileSync(historyPath, 'utf8'), 'Existing history stays untouched\n');
-  assert.deepEqual(result.files, manifests.map((path) => join(directory, path)));
+  assert.deepEqual(
+    result.files,
+    manifests.map((path) => join(directory, path)),
+  );
   assert.deepEqual(checkPluginVersions(root), { plugins: ['other', 'sample'] });
 });
 
@@ -134,7 +159,10 @@ test('rejects symlinked plugin paths and manifests without touching their target
   const root = fixture(t);
   const directory = addPlugin(root);
   fs.symlinkSync(directory, join(root, 'plugins/linked'), 'dir');
-  assert.throws(() => versionPlugin(root, { name: 'linked', release: 'patch' }), /Expected a directory/);
+  assert.throws(
+    () => versionPlugin(root, { name: 'linked', release: 'patch' }),
+    /Expected a directory/,
+  );
   fs.rmSync(join(directory, '.claude-plugin/plugin.json'));
   fs.symlinkSync(join(directory, 'plugin.json'), join(directory, '.claude-plugin/plugin.json'));
   assert.throws(() => versionPlugin(root, { name: 'sample', release: 'patch' }), /regular file/);
@@ -152,7 +180,10 @@ test('restores prior manifest contents if a later file replacement fails', (t) =
     if (calls === 2) throw new Error('Simulated rename failure');
     return rename(...args);
   });
-  assert.throws(() => versionPlugin(root, { name: 'sample', release: 'patch' }), /Simulated rename failure/);
+  assert.throws(
+    () => versionPlugin(root, { name: 'sample', release: 'patch' }),
+    /Simulated rename failure/,
+  );
   mocked.mock.restore();
   for (const [index, path] of manifests.entries()) {
     assert.equal(fs.readFileSync(join(directory, path), 'utf8'), before[index]);
@@ -210,13 +241,19 @@ test('creation rejects invalid input, malformed catalog and template before regi
 
   for (const invalid of [null, [], { name: 'test', plugins: [null] }]) {
     fs.writeFileSync(catalogPath, JSON.stringify(invalid));
-    assert.throws(() => createPlugin(root, { name: 'sample', description: 'test' }), /Invalid marketplace/);
+    assert.throws(
+      () => createPlugin(root, { name: 'sample', description: 'test' }),
+      /Invalid marketplace/,
+    );
     assert.deepEqual(fs.readdirSync(join(root, 'plugins')), []);
   }
 
   fs.writeFileSync(catalogPath, original);
   fs.writeFileSync(join(root, 'templates/plugin/plugin.json'), '{}');
-  assert.throws(() => createPlugin(root, { name: 'sample', description: 'test' }), /Invalid name or stable version/);
+  assert.throws(
+    () => createPlugin(root, { name: 'sample', description: 'test' }),
+    /Invalid name or stable version/,
+  );
   assert.deepEqual(fs.readdirSync(join(root, 'plugins')), []);
   assert.equal(fs.readFileSync(catalogPath, 'utf8'), original);
 });

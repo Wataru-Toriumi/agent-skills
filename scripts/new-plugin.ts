@@ -4,7 +4,7 @@ import { createPlugin } from './lib/plugin-commands.ts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 
-function main(): void {
+const main = (): void => {
   const { values, positionals } = parseArgs({
     allowPositionals: true,
     options: {
@@ -23,7 +23,7 @@ function main(): void {
 
   const result = createPlugin(root, { name, description: values.description ?? '' });
   console.log(`Created plugins/${name} and registered ${name}@${result.marketplace}`);
-}
+};
 
 try {
   main();

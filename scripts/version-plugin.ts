@@ -5,7 +5,7 @@ import { parseReleaseType } from './lib/releases.ts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 
-function main(): void {
+const main = (): void => {
   const { values, positionals } = parseArgs({
     allowPositionals: true,
     options: {
@@ -38,11 +38,13 @@ function main(): void {
     release: parseReleaseType(release),
     dryRun: values['dry-run'],
   });
-  console.log(`${values['dry-run'] ? '[dry-run] ' : ''}${name}: ${result.previous} -> ${result.next}`);
+  console.log(
+    `${values['dry-run'] ? '[dry-run] ' : ''}${name}: ${result.previous} -> ${result.next}`,
+  );
   for (const path of result.files) {
     console.log(path);
   }
-}
+};
 
 try {
   main();

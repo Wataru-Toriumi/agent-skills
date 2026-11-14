@@ -2,20 +2,18 @@ export type ReleaseType = 'patch' | 'minor' | 'major';
 
 const stableVersionPattern = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/;
 
-export function isStableVersion(value: unknown): value is string {
-  return typeof value === 'string'
-    && value === value.trim()
-    && stableVersionPattern.test(value);
-}
+export const isStableVersion = (value: unknown): value is string => {
+  return typeof value === 'string' && value === value.trim() && stableVersionPattern.test(value);
+};
 
-export function parseReleaseType(value: unknown): ReleaseType {
+export const parseReleaseType = (value: unknown): ReleaseType => {
   if (value === 'patch' || value === 'minor' || value === 'major') {
     return value;
   }
   throw new Error('Release type must be patch, minor or major.');
-}
+};
 
-export function nextVersion(version: string, release: ReleaseType): string {
+export const nextVersion = (version: string, release: ReleaseType): string => {
   if (!isStableVersion(version)) {
     throw new Error(`Unsupported version: ${version}. Use a stable version such as 0.1.0.`);
   }
@@ -31,4 +29,4 @@ export function nextVersion(version: string, release: ReleaseType): string {
     default:
       throw new Error('Release type must be patch, minor or major.');
   }
-}
+};
