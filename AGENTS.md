@@ -26,3 +26,4 @@
 - コミットを依頼されたら [commit-changes](plugins/forge/skills/commit-changes/SKILL.md) に従う。独立して採用・取り消しできる目的で分割し、変更内容が伝わる件名にする。
 - PR を依頼されたら [create-pr](plugins/forge/skills/create-pr/SKILL.md) に従う。先に [review-code](plugins/forge/skills/review-code/SKILL.md) でセルフレビューし、提出先の PR テンプレートに沿って本文を書く。
 - レビューの指摘は発生条件・根拠・影響を示す。不具合、確認事項、改善提案を区別する。
+- 重要変更の独立レビュー、対象SHAの記録、再検証・マージ条件は [レビューとマージ](docs/review-and-merge.md) に従う。
