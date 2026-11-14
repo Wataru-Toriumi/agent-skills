@@ -9,6 +9,42 @@
 | [draw-mermaid](skills/draw-mermaid/SKILL.md) | Mermaid の図種を選び、作図・描画確認する |
 | [create-marp-slides](skills/create-marp-slides/SKILL.md) | Marp の構成・デザインを整え、全ページを描画確認する |
 
+## 想定実行順序
+
+図とスライドはそれぞれ単独で作れる。スライドに図が必要な場合は、描画済みの図を組み込む。
+
+```mermaid
+---
+config:
+  theme: base
+  look: classic
+  fontFamily: sans-serif
+  themeVariables:
+    primaryColor: "#F1F5F9"
+    primaryTextColor: "#0F172A"
+    primaryBorderColor: "#64748B"
+    lineColor: "#64748B"
+    tertiaryColor: "#F8FAFC"
+    clusterBkg: "#F8FAFC"
+    clusterBorder: "#CBD5E1"
+    edgeLabelBackground: "#FFFFFF"
+  flowchart:
+    wrappingWidth: 300
+    curve: linear
+    nodeSpacing: 32
+    rankSpacing: 40
+---
+flowchart TD
+    purpose{"作りたい成果物"}
+    purpose -->|図| diagram("作図・描画確認<br/>draw-mermaid")
+    purpose -->|スライド| slides("構成・作成・描画確認<br/>create-marp-slides")
+    diagram --> rendered["Mermaidソース・SVG／PNG"]
+    rendered -. 図が必要な場合 .-> slides
+    slides --> output["発表用HTML・配布用PDF"]
+```
+
+図のソースのみ、PDFのみなど、指定があれば出力形式を合わせる。
+
 ## 使い方
 
 利用するツールでマーケットプレイスを登録し、インストールする。
