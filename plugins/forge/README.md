@@ -1,6 +1,6 @@
 # forge
 
-コードの整理からコミット・PR・レビューまでを支援する、Claude Code / Codex 用プラグイン。
+要求の実装・検証からコミット・PR・レビューまでを支援する、Claude Code / Codex 用プラグイン。
 
 変更履歴は [GitHub Releases](https://github.com/Wataru-Toriumi/agent-skills/releases?q=forge) を参照する。
 
@@ -8,6 +8,7 @@
 
 | スキル | 用途 |
 | --- | --- |
+| [implement-work-item](skills/implement-work-item/SKILL.md) | 受け入れ条件に沿って実装・検証し、依頼範囲でPRまで進める |
 | [refactor-code](skills/refactor-code/SKILL.md) | 振る舞いを保ち、責務・依存関係・重複を整理する |
 | [tidy-code](skills/tidy-code/SKILL.md) | 今触る箇所を小さく整え、理解や次の変更を助ける |
 | [commit-changes](skills/commit-changes/SKILL.md) | 差分を確認し、意味のある単位でコミットする |
@@ -19,7 +20,7 @@
 
 ## 想定実行順序
 
-コード整理は必要な場合に選ぶ。`create-pr` はセルフレビューと必要なコミットを含むため、直接依頼できる。
+要求の実装には `implement-work-item` を使う。実装・検証後は、依頼の到達点に応じてコミット・PRへ進む。コード整理は必要な場合に選ぶ。`create-pr` はセルフレビューと必要なコミットを含むため、直接依頼できる。
 
 ```mermaid
 ---
@@ -75,6 +76,8 @@ codex plugin add forge@toripeeeeee-plugins
 Claude Code では `/forge:<スキル名>`（例: `/forge:address-pr-comments`）で呼び出す。
 Codex ではインストール後のスキル一覧から該当スキルを選ぶか、スキル名を指定して依頼する。
 
+- 「implement-work-item で、このストーリーを実装・検証し、PRまで作成して」
+- 「implement-work-item で、前回の作業記録から検証失敗の箇所を再開して」
 - 「refactor-code で、請求計算と送信処理の責務を分けて。振る舞いは維持して」
 - 「tidy-code で、この関数の条件分岐を、次の修正に備えて読みやすくして」
 - 「commit-changes で、今回の修正を意味のある単位に分けてコミットして」
