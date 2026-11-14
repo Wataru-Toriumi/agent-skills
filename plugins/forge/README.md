@@ -20,7 +20,7 @@
 
 ## 想定実行順序
 
-実装からPR作成まで依頼した場合の流れ。
+実装・コード整理からPR作成まで依頼した場合の流れ。依頼に応じて入口を選ぶ。
 `implement-work-item` は依頼の到達点まで進行を管理し、`create-pr` はセルフレビュー・コミット・pushを含めてPRを作成する。
 
 ```mermaid
@@ -45,16 +45,20 @@ config:
     rankSpacing: 40
 ---
 flowchart TD
+    tidy("局所的に整える<br/>tidy-code")
     implement("要求を実装・検証<br/>implement-work-item")
+    refactor("責務・依存を整理<br/>refactor-code")
     subgraph pr["create-pr：PR作成・更新"]
         review("セルフレビュー<br/>review-code") --> commit("変更をコミット<br/>commit-changes")
         commit --> publish["push・PR作成／更新"]
     end
+    tidy --> pr
     implement --> pr
-    publish -->|コメントを受けたら| address("指摘を確認・対応<br/>address-pr-comments")
+    refactor --> pr
+    pr -->|コメントを受けたら| address("指摘を確認・対応<br/>address-pr-comments")
 ```
 
-コード整理には必要に応じて `tidy-code`・`refactor-code` を使う。各スキルは単独でも使える。
+各スキルは単独でも使える。
 同じ差分に対する検証・レビューは再利用し、修正した場合は影響する範囲を再確認する。
 
 ## 導入
