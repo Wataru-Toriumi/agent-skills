@@ -9,8 +9,16 @@ description = "Install dependencies using the committed lockfile"
 run = "pnpm install --frozen-lockfile"
 
 [tasks.check]
-description = "Lint documents, check plugin metadata, and run tests"
-run = ["mise run lint:md", "mise run lint:text", "pnpm plugin:check", "pnpm test"]
+description = "Lint code and documents, check plugin metadata, and run tests"
+run = ["mise run lint:code", "mise run lint:md", "mise run lint:text", "pnpm plugin:check", "pnpm test"]
+
+[tasks."lint:code"]
+description = "Check TypeScript with Biome"
+run = "pnpm lint:code"
+
+[tasks."fix:code"]
+description = "Format TypeScript, organize imports, and apply safe lint fixes"
+run = "pnpm fix:code"
 
 [tasks."lint:md"]
 description = "Check Markdown formatting"

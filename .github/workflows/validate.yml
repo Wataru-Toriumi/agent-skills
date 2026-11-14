@@ -38,7 +38,7 @@ jobs:
       - name: Install with the committed lockfile
         run: mise run setup
 
-      - name: Lint documents, check plugins, and test commands
+      - name: Lint code and documents, check plugins, and test commands
         run: mise run check
 
       - name: Verify tracked files are unchanged

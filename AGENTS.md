@@ -7,6 +7,7 @@
 - 新しい作業は最新の `origin/main` からブランチを作る。既存作業の続きやユーザーの指定がある場合は、そのブランチを使う。未コミットの変更を保持する。
 - 開発ツールは mise、パッケージ管理は pnpm を使う。セットアップは `mise run setup`。詳細は [開発ガイド](docs/development.md) を参照する。
 - リポジトリの生成・管理スクリプトは TypeScript で書き、Node.js の型除去で実行できる構文にする。
+- `scripts/`・`tests/` の関数は原則 `const` の arrow 関数とし、Biome で検査・整形する。例外は [開発ガイド](docs/development.md#typescript) に従う。
 
 ## 文書とスキル
 
