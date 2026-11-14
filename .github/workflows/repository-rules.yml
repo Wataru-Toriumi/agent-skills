@@ -1,0 +1,39 @@
+name: Manage main quality gate
+
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: Apply the reviewed configuration (otherwise show the plan)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: main-quality-gate
+  cancel-in-progress: false
+
+jobs:
+  rules:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: repository-administration
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: jdx/mise-action@v5
+      - name: Plan or apply the reviewed main ruleset
+        env:
+          APPLY: ${{ inputs.apply }}
+          GITHUB_TOKEN: ${{ github.token }}
+          RULESET_ADMIN_TOKEN: ${{ inputs.apply && secrets.RULESET_ADMIN_TOKEN || '' }}
+        run: |
+          if [ "$APPLY" = "true" ]; then
+            mise exec -- node scripts/sync-main-rules.ts --repository "$GITHUB_REPOSITORY" --apply
+          else
+            mise exec -- node scripts/sync-main-rules.ts --repository "$GITHUB_REPOSITORY"
+          fi
