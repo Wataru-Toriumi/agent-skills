@@ -1,5 +1,4 @@
 import fs from 'node:fs';
-import { join } from 'node:path';
 import { applyFileEdits, formatJson } from './files.ts';
 import {
   assertPluginName,
@@ -10,8 +9,8 @@ import {
   readPluginDirectory,
   templateDirectory,
 } from './plugin-files.ts';
-import { nextVersion } from './releases.ts';
 import type { ReleaseType } from './releases.ts';
+import { nextVersion } from './releases.ts';
 
 type CreatePluginOptions = {
   name: string;
@@ -30,7 +29,10 @@ type VersionResult = {
   files: string[];
 };
 
-export function createPlugin(root: string, options: CreatePluginOptions): { marketplace: string } {
+export const createPlugin = (
+  root: string,
+  options: CreatePluginOptions,
+): { marketplace: string } => {
   const { name, description } = options;
   assertPluginName(name);
   if (!description.trim()) {
@@ -61,18 +63,18 @@ export function createPlugin(root: string, options: CreatePluginOptions): { mark
     throw error;
   }
   return { marketplace: catalog.name };
-}
+};
 
-export function checkPluginVersions(root: string): { plugins: string[] } {
+export const checkPluginVersions = (root: string): { plugins: string[] } => {
   readPluginDirectory(templateDirectory(root));
   const plugins = listPluginNames(root);
   for (const name of plugins) {
     readPluginDirectory(pluginDirectory(root, name), name);
   }
   return { plugins };
-}
+};
 
-export function versionPlugin(root: string, options: VersionPluginOptions): VersionResult {
+export const versionPlugin = (root: string, options: VersionPluginOptions): VersionResult => {
   const { name, release, dryRun = false } = options;
   assertPluginName(name);
 
@@ -84,4 +86,4 @@ export function versionPlugin(root: string, options: VersionPluginOptions): Vers
     applyFileEdits(edits);
   }
   return { previous: plugin.version, next, files: edits.map((edit) => edit.path) };
-}
+};

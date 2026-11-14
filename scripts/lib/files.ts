@@ -1,5 +1,5 @@
-import fs from 'node:fs';
 import { randomUUID } from 'node:crypto';
+import fs from 'node:fs';
 
 export type TextFile = {
   path: string;
@@ -12,29 +12,29 @@ export type FileEdit = {
   after: string;
 };
 
-export function assertDirectory(path: string): void {
+export const assertDirectory = (path: string): void => {
   if (!fs.lstatSync(path).isDirectory()) {
     throw new Error(`Expected a directory, not a symlink or file: ${path}`);
   }
-}
+};
 
-export function readTextFile(path: string): TextFile {
+export const readTextFile = (path: string): TextFile => {
   if (!fs.lstatSync(path).isFile()) {
     throw new Error(`Expected a regular file: ${path}`);
   }
   return { path, content: fs.readFileSync(path, 'utf8') };
-}
+};
 
-export function readJsonFile(path: string): { file: TextFile; value: unknown } {
+export const readJsonFile = (path: string): { file: TextFile; value: unknown } => {
   const file = readTextFile(path);
   return { file, value: JSON.parse(file.content) };
-}
+};
 
-export function formatJson(value: unknown): string {
+export const formatJson = (value: unknown): string => {
   return `${JSON.stringify(value, null, 2)}\n`;
-}
+};
 
-function restoreFiles(edits: FileEdit[]): void {
+const restoreFiles = (edits: FileEdit[]): void => {
   for (const edit of [...edits].reverse()) {
     if (edit.before === null) {
       fs.rmSync(edit.path);
@@ -42,10 +42,10 @@ function restoreFiles(edits: FileEdit[]): void {
       fs.writeFileSync(edit.path, edit.before, 'utf8');
     }
   }
-}
+};
 
 // Stage all contents before replacing files. Recover completed replacements on error.
-export function applyFileEdits(edits: FileEdit[]): void {
+export const applyFileEdits = (edits: FileEdit[]): void => {
   const staged: Array<{ edit: FileEdit; temporaryPath: string }> = [];
   const applied: FileEdit[] = [];
 
@@ -68,4 +68,4 @@ export function applyFileEdits(edits: FileEdit[]): void {
       fs.rmSync(temporaryPath, { force: true });
     }
   }
-}
+};

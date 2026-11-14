@@ -2,24 +2,24 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { test } from 'node:test';
 import type { TestContext } from 'node:test';
-import { git } from '../scripts/lib/release-notes.ts';
+import { test } from 'node:test';
 import { checkVersionChanges, greaterVersion } from '../scripts/lib/plugin-version-policy.ts';
+import { git } from '../scripts/lib/release-notes.ts';
 
-function write(root: string, name: string, version: string) {
+const write = (root: string, name: string, version: string) => {
   for (const file of ['plugin.json', '.claude-plugin/plugin.json']) {
     const path = join(root, 'plugins', name, file);
     fs.mkdirSync(join(path, '..'), { recursive: true });
     fs.writeFileSync(path, JSON.stringify({ name, version }));
   }
-}
-function commit(root: string) {
+};
+const commit = (root: string) => {
   git(root, 'add', '.');
   git(root, '-c', 'commit.gpgsign=false', 'commit', '--allow-empty', '-m', 'test');
   return git(root, 'rev-parse', 'HEAD');
-}
-function fixture(t: TestContext) {
+};
+const fixture = (t: TestContext) => {
   const root = fs.mkdtempSync(join(tmpdir(), 'version-policy-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   git(root, 'init', '-b', 'main');
@@ -27,7 +27,7 @@ function fixture(t: TestContext) {
   git(root, 'config', 'user.email', 'test@example.invalid');
   write(root, 'sample', '0.1.0');
   return { root, base: commit(root) };
-}
+};
 
 test('compares numeric versions without precision loss', () => {
   assert.ok(greaterVersion('1.0.0', '0.99.99'));
@@ -36,7 +36,7 @@ test('compares numeric versions without precision loss', () => {
   assert.equal(greaterVersion('0.0.9', '0.1.0'), false);
 });
 for (const file of ['SKILL.md', 'README.md', 'assets/diagram.svg']) {
-  test(`requires bump for ${file}`, t => {
+  test(`requires bump for ${file}`, (t) => {
     const { root, base } = fixture(t);
     const path = join(root, 'plugins/sample', file);
     fs.mkdirSync(join(path, '..'), { recursive: true });
@@ -49,7 +49,7 @@ for (const file of ['SKILL.md', 'README.md', 'assets/diagram.svg']) {
   });
 }
 
-test('ignores repository docs, accepts new plugins and removal', t => {
+test('ignores repository docs, accepts new plugins and removal', (t) => {
   const { root, base } = fixture(t);
   fs.writeFileSync(join(root, 'README.md'), 'Repository docs');
   commit(root);
@@ -60,19 +60,22 @@ test('ignores repository docs, accepts new plugins and removal', t => {
   assert.deepEqual(checkVersionChanges(root, base, 'HEAD'), ['added', 'sample']);
 });
 
-test('rejects decreasing and mismatched versions and missing comparison commits', t => {
+test('rejects decreasing and mismatched versions and missing comparison commits', (t) => {
   const { root, base } = fixture(t);
   write(root, 'sample', '0.0.9');
   commit(root);
   assert.throws(() => checkVersionChanges(root, base, 'HEAD'), /without a version increase/);
-  fs.writeFileSync(join(root, 'plugins/sample/plugin.json'), JSON.stringify({ name: 'sample', version: '0.2.0' }));
+  fs.writeFileSync(
+    join(root, 'plugins/sample/plugin.json'),
+    JSON.stringify({ name: 'sample', version: '0.2.0' }),
+  );
   commit(root);
   assert.throws(() => checkVersionChanges(root, base, 'HEAD'), /mismatched/);
   assert.throws(() => checkVersionChanges(root, 'does-not-exist', 'HEAD'));
 });
 
-test('checks every affected plugin when a file is moved across distributions', t => {
-  const { root, base } = fixture(t);
+test('checks every affected plugin when a file is moved across distributions', (t) => {
+  const { root } = fixture(t);
   write(root, 'other', '0.1.0');
   fs.writeFileSync(join(root, 'plugins/sample/move.txt'), 'same');
   const comparison = commit(root);
