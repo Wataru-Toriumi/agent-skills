@@ -81,7 +81,17 @@ CI の 26 系は最新のパッチ版、通常の開発では `mise.toml` の固
 - `pnpm test`：バージョン更新、リリースノートの生成、再実行、エラー時の挙動
 - `git diff --exit-code`：検証によって追跡済みファイルが変更されていないこと
 
-PR でのバージョン更新漏れ（変更前後で番号が上がったか）の判定は含まない。
+`Plugin version policy` はPRの比較元とマージ結果を比較し、`plugins/<name>/` 配下が
+変わった既存Pluginに、両マニフェストの版番号増加を要求する。README・画像・削除も対象。
+新規Pluginは有効な初期版を要求し、Plugin全体の削除には新しい版を要求しない。
+カタログの削除・対応関係は配布物検証で別途確認する。
+
+ローカルではコミット済みの比較対象を指定する。比較元を取得できない場合も検査は失敗する。
+
+```sh
+node scripts/check-version-changes.ts --base origin/main --head HEAD
+```
+
 マージを必ず検証成功後に制限する場合は、GitHub のルールセットで
 `Validate (Node 24.12.0)` と `Validate (Node 26)` を必須チェックに指定する。
 
