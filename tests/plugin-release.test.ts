@@ -42,6 +42,7 @@ test('plans per-plugin notes and pins versions to their introduction on main', (
   assert.match(initial.find((release) => release.tag === 'sample/v0.1.0')!.body, /feat: add plugins/);
 
   fs.writeFileSync(join(root, 'plugins/other/README.md'), 'Other change');
+  writePlugin(root, 'other', '0.1.1');
   commit(root, 'docs: change other plugin');
   git(root, 'switch', '-c', 'feature');
   writePlugin(root, 'sample', '0.1.1');
@@ -58,7 +59,8 @@ test('plans per-plugin notes and pins versions to their introduction on main', (
   assert.match(sample.body, /Correct sample behavior/);
   assert.match(sample.body, /https:\/\/github.com\/owner\/repo\/pull\/8/);
   assert.doesNotMatch(sample.body, /change other|explain repository|add plugins/);
-  assert.deepEqual(releases.find((release) => release.tag === 'other/v0.1.0'), initial.find((release) => release.tag === 'other/v0.1.0'));
+  assert.equal(releases.find((release) => release.tag === 'other/v0.1.1')!.commit,
+    git(root, 'log', '--format=%H', '-1', '--', 'plugins/other/plugin.json'));
 });
 
 test('includes only changes since the previous version and escapes Markdown in subjects', (t) => {
@@ -204,4 +206,21 @@ test('publishing from a PR or local shell is refused before contacting GitHub', 
     assert.equal(result.status, 1);
     assert.match(result.stderr, /Publish only/);
   }
+});
+
+test('rejects distribution drift after the version commit, even with an existing release tag', (t) => {
+  const root = fixture(t);
+  git(root, 'tag', 'sample/v0.1.0');
+  fs.writeFileSync(join(root, 'plugins/sample/SKILL.md'), 'Changed behavior');
+  commit(root, 'docs: change skill without bump');
+  assert.throws(() => planPluginReleases(root, 'owner/repo'), /Distribution changed after version/);
+  writePlugin(root, 'sample', '0.1.1');
+  const head = commit(root, 'fix: bump sample');
+  assert.equal(planPluginReleases(root, 'owner/repo').find(item => item.tag === 'sample/v0.1.1')!.commit, head);
+});
+
+test('refuses dirty distributed files without contacting GitHub', (t) => {
+  const root = fixture(t);
+  fs.writeFileSync(join(root, 'plugins/sample/new.txt'), 'Uncommitted');
+  assert.throws(() => planPluginReleases(root, 'owner/repo'), /Uncommitted distribution/);
 });

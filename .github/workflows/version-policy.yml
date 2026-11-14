@@ -1,0 +1,24 @@
+name: Check plugin version changes
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  versions:
+    name: Plugin version policy
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out the PR merge result with both histories
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: jdx/mise-action@v5
+      - name: Require a version increase for every changed distribution
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: mise exec -- node scripts/check-version-changes.ts --base "$BASE_SHA" --head "$GITHUB_SHA"
