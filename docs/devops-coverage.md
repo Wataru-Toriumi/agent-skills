@@ -38,7 +38,7 @@ block
 ```
 
 Plan から時計回りに進み、Monitor から次の計画へ運用の知見を戻す。破線の枠は専用スキルがない段階を示す。
-[sketch](../plugins/sketch/README.md) は図全体を横断し、要求・構成・処理・結果を図やスライドで説明する。
+[sketch](../plugins/sketch/README.md) は図全体を横断し、要求・構成・処理・結果を図・スライド・HTMLの説明ページで伝える。
 
 ## 段階ごとの役割
 
