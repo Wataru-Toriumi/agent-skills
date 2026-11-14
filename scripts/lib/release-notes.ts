@@ -60,6 +60,12 @@ export function planPluginReleases(root: string, repository: string): PluginRele
     const { version } = readPluginDirectory(pluginDirectory(root, name), name);
     const path = `plugins/${name}`;
     const { commit, previous } = versionRange(root, `${path}/plugin.json`, version);
+    if (git(root, 'status', '--porcelain', '--untracked-files=all', '--', path)) {
+      throw new Error(`Uncommitted distribution changes: ${name}`);
+    }
+    if (git(root, 'rev-parse', `HEAD:${path}`) !== git(root, 'rev-parse', `${commit}:${path}`)) {
+      throw new Error(`Distribution changed after version ${version} was introduced: ${name}. Increase its version before publishing.`);
+    }
     const range = previous ? `${previous}..${commit}` : commit;
     const log = git(root, 'log', '--first-parent', '--format=%H%x09%s', range, '--', path);
     const changes = log.split('\n').filter(Boolean).map((line) => {
