@@ -12,6 +12,7 @@
 | データの関連 | [erDiagram](../examples/er.md) | エンティティ、多重度、キー |
 | 型の責務と関係 | [classDiagram](../examples/class.md) | 属性、操作、継承・関連の意味 |
 | 配置を揃えた構成 | [block](../examples/block.md) | 層、まとまり、接続 |
+| 周回するプロセス | [循環図](../examples/cycle.md) | 段階の順序、次の計画へ戻す関係 |
 | サービスと実行基盤の接続 | [architecture-beta](../examples/architecture.md) | サービス、リソース、配置境界 |
 | システムと利用者・外部との関係 | [C4Context](../examples/c4-context.md) | 対象システム、外部システム、利用者 |
 | システム内部のアプリとデータストア | [C4Container](../examples/c4-container.md) | 責務、技術、接続、システム境界 |
