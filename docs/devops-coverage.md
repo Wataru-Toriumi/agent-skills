@@ -20,7 +20,7 @@ config:
 block
     columns 3
     plan("01 Plan<br/>ink") code("02 Code<br/>forge") build("03 Build<br/>専用スキルなし")
-    monitor("08 Monitor<br/>pulse") sketch("sketch<br/>図・スライド") test("04 Test<br/>probe")
+    monitor("08 Monitor<br/>pulse") sketch("sketch<br/>文章・図・スライド") test("04 Test<br/>probe")
     operate("07 Operate<br/>pulse") deploy("06 Deploy<br/>専用スキルなし") release("05 Release<br/>専用スキルなし")
 
     plan --> code
@@ -39,7 +39,8 @@ block
 ```
 
 Plan から時計回りに進み、Monitor から次の計画へ運用の知見を戻す。破線の枠は専用スキルがない段階を示す。
-[sketch](../plugins/sketch/README.md) は図全体を横断し、要求・構成・処理・結果を図・スライド・HTMLの説明ページで伝える。
+[sketch](../plugins/sketch/README.md) は各工程を横断し、要求・構成・処理・結果を文章・図・スライド・HTMLの説明ページで伝える。
+文章には `polish-writing` を使い、意味と根拠を保って読みやすく整える。
 
 ## 段階ごとの役割
 

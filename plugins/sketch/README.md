@@ -1,11 +1,12 @@
 # sketch
 
-図・スライド・HTMLの説明ページで伝える、Claude Code / Codex 用プラグイン。
+文章・図・スライド・HTMLの説明ページで伝える、Claude Code / Codex 用プラグイン。
 
 変更履歴は [GitHub Releases](https://github.com/Wataru-Toriumi/agent-skills/releases?q=sketch) を参照する。
 
 | スキル | 用途 |
 | --- | --- |
+| [polish-writing](skills/polish-writing/SKILL.md) | 日本語の意味と根拠を保ち、読みやすく簡潔に作成・推敲する |
 | [draw-mermaid](skills/draw-mermaid/SKILL.md) | Mermaid の図種を選び、作図・描画確認する |
 | [create-marp-slides](skills/create-marp-slides/SKILL.md) | Marp の構成・デザインを整え、全ページを描画確認する |
 | [explain-visually](skills/explain-visually/SKILL.md) | 図表と短い説明を組み合わせ、単一HTMLで共有する |
@@ -13,6 +14,7 @@
 ## 想定実行順序
 
 成果物に合うスキルから始める。スライドやHTMLにMermaidの図が必要なら、描画した図を組み込む。
+文章には `polish-writing` を使う。図・スライド・説明ページの文面を整える場合も、必要事項や指定書式を保って推敲する。
 
 ```mermaid
 ---
@@ -37,9 +39,11 @@ config:
 ---
 flowchart TD
     purpose{"作りたい成果物"}
+    purpose -->|文章| writing("文章の作成・推敲<br/>polish-writing")
     purpose -->|図| diagram("作図・描画確認<br/>draw-mermaid")
     purpose -->|スライド| slides("構成・作成・描画確認<br/>create-marp-slides")
     purpose -->|説明ページ| explain("図表・説明・操作確認<br/>explain-visually")
+    writing --> prose["読みやすく整えた文章"]
     diagram --> rendered["Mermaidソース・SVG／PNG"]
     rendered -. 図が必要な場合 .-> slides
     rendered -. Mermaidを使う場合 .-> explain
@@ -64,6 +68,15 @@ codex plugin add sketch@toripeeeeee-plugins
 ```
 
 Claude Code では `/sketch:<スキル名>`、Codex ではスキル一覧やスキル名から利用する。
+
+## 日本語の文章
+
+- 「polish-writing で、この説明を利用者向けに短く読みやすくして。条件と例外は残して」
+- 「polish-writing で、このメモからメンテナンス案内の草案を書いて。日時や影響範囲はメモにある情報を使って」
+
+文章の作成・推敲に単独で使える。要求や設計の内容を決めるときは `ink` などの専用スキルと併用する。
+出力先と書式は依頼に合わせ、チャット上の草案はファイルに保存しない。
+既存の文章検査がある環境では、意味の確認とあわせて検査する。専用ツールの導入は不要。
 
 ## Mermaid の図
 
