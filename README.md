@@ -11,7 +11,7 @@ DevOps のワークフローを補助する、Claude Code・Codex 向けのス�
 | [ink](plugins/ink/README.md) | 要求整理・文書作成と要求・設計レビューを支援する | `clarify-requirements`、`review-requirements`、`write-prd`、`write-work-item`、`write-design-doc`、`write-adr`、`review-design` |
 | [forge](plugins/forge/README.md) | 要求の実装・検証からコミット・PR・レビューまでを支援する | `implement-work-item`、`refactor-code`、`tidy-code`、`commit-changes`、`create-pr`、`review-code`、`address-pr-comments` |
 | [sketch](plugins/sketch/README.md) | 文章・図・スライド・HTMLの説明ページを作り、伝わりやすく整える | `polish-writing`、`draw-mermaid`、`create-marp-slides`、`explain-visually` |
-| [probe](plugins/probe/README.md) | テスト設計・品質の検証を支援する | `plan-tests`、`design-tests`、`review-test-cases` |
+| [probe](plugins/probe/README.md) | テスト設計・形式手法による検証を支援する | `plan-tests`、`design-tests`、`review-test-cases`、`verify-formally` |
 | [pulse](plugins/pulse/README.md) | 監視・障害対応・振り返りを通じて運用を改善する | `plan-monitoring`、`respond-to-incident`、`write-postmortem`、`improve-operations` |
 
 各プラグインの役割と未対応の範囲は [DevOps サイクルとの対応](docs/devops-coverage.md) を参照する。
