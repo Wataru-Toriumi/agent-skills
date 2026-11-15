@@ -7,6 +7,7 @@
 ---
 config:
   theme: base
+  htmlLabels: false
   themeVariables:
     fontFamily: sans-serif
     primaryColor: "#F1F5F9"
