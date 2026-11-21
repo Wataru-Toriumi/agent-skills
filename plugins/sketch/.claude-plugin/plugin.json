@@ -1,5 +1,5 @@
 {
   "name": "sketch",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "文章・図・スライド・HTMLの説明ページで伝える。日本語の作成・推敲、Mermaid の作図、Marp・Google スライドの作成、表示と操作の確認を支援する。"
 }
