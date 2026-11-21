@@ -38,6 +38,7 @@ config:
     rankSpacing: 40
 ---
 flowchart TD
+    requirements["ink の要求・設計<br/>条件・リスク・対象の版"] -. 方針を具体化 .-> plan
     plan("種類・範囲を選ぶ<br/>plan-tests") --> design("ケースを作る<br/>design-tests")
     design --> review("妥当性を確認<br/>review-test-cases")
     plan -. 形式手法が必要な場合 .-> formal("性質を形式化・検証<br/>verify-formally")
@@ -47,6 +48,9 @@ flowchart TD
 ```
 
 指摘の内容に応じて、方針は `plan-tests`、ケースは `design-tests` で見直す。ケースのレビューはテスト実行やリリース承認を意味しない。
+
+ink から要求・設計の版、受け入れ条件、失敗経路、仮定・未決事項を受け取り、実装前でも検証方法を具体化できる。
+方針・ケース・レビュー・形式検証から必要なものを選び、要求との対応と未確認範囲を返す。計画やケースの完成と、検証の実行成功は区別する。
 
 ## 導入
 
