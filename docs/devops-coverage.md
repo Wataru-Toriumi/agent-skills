@@ -41,6 +41,8 @@ block
 Plan から時計回りに進み、Monitor から次の計画へ運用の知見を戻す。破線の枠は専用スキルがない段階を示す。
 [sketch](../plugins/sketch/README.md) は各工程を横断し、要求・構成・処理・結果を文章・図・スライド・HTMLの説明ページで伝える。
 文章には `polish-writing` を使い、意味と根拠を保って読みやすく整える。
+ink・forge・probe・pulse の文書・報告から、必要な表現に応じて sketch を利用できる。
+受け渡す情報と具体例は [sketch の連携](../plugins/sketch/README.md#他のプラグインから利用する) を参照する。
 
 ## 段階ごとの役割
 
