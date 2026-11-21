@@ -8,4 +8,4 @@ respect-gitignore = true
 # 文書テンプレートの <...> は記入欄として使う。
 "plugins/*/skills/*/assets/*-template.md" = ["MD033"]
 # Marp は title メタデータと表紙見出し、独立した強調文を併用する。
-"plugins/sketch/skills/create-marp-slides/assets/deck-template.md" = ["MD025", "MD036"]
+"plugins/sketch/skills/create-slides/assets/deck-template.md" = ["MD025", "MD036"]

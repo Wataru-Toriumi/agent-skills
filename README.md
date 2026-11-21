@@ -10,14 +10,14 @@ DevOps のワークフローを補助する、Claude Code・Codex 向けのス�
 | --- | --- | --- |
 | [ink](plugins/ink/README.md) | 要求整理・文書作成と要求・設計レビューを支援する | `clarify-requirements`、`review-requirements`、`write-prd`、`write-work-item`、`write-design-doc`、`write-adr`、`review-design` |
 | [forge](plugins/forge/README.md) | 要求の実装・検証からコミット・PR・レビューまでを支援する | `implement-work-item`、`refactor-code`、`tidy-code`、`commit-changes`、`create-pr`、`review-code`、`address-pr-comments` |
-| [sketch](plugins/sketch/README.md) | 文章・図・スライド・HTMLの説明ページを作り、伝わりやすく整える | `polish-writing`、`draw-mermaid`、`create-marp-slides`、`explain-visually` |
+| [sketch](plugins/sketch/README.md) | 文章・図・スライド・HTMLの説明ページを作り、伝わりやすく整える | `polish-writing`、`draw-mermaid`、`create-slides`、`explain-visually` |
 | [probe](plugins/probe/README.md) | テスト設計・形式手法による検証を支援する | `plan-tests`、`design-tests`、`review-test-cases`、`verify-formally` |
 | [pulse](plugins/pulse/README.md) | 監視・障害対応・振り返りを通じて運用を改善する | `plan-monitoring`、`respond-to-incident`、`write-postmortem`、`improve-operations` |
 
 各プラグインの役割と未対応の範囲は [DevOps サイクルとの対応](docs/devops-coverage.md) を参照する。
 
 ink・forge・probe・pulse の文書や報告は、必要に応じて [sketch](plugins/sketch/README.md#他のプラグインから利用する) で推敲・図解できる。
-Marp の発表資料や HTML の説明ページも、依頼に合わせて作成する。sketch の導入は任意。
+Marp・Google スライドの発表資料や HTML の説明ページも、依頼に合わせて作成する。sketch の導入は任意。
 
 pulse の運用改善を ink で要求・作業項目にし、forge で実装・検証へ進められる。
 依頼された範囲で必要な工程を選び、実装の完了と運用での効果確認を分ける。使い方は [pulse の連携](plugins/pulse/README.md#改善策を実装へつなぐ) を参照する。
