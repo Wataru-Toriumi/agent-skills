@@ -98,5 +98,5 @@ Codex ではインストール後のスキル一覧から該当スキルを選�
 実装だけなら実装・検証まで、コミットだけならpushせずに止める。レビューや草案だけの依頼では、コードやGitHubを変更しない。
 `create-pr` は提出先のPRテンプレートに従う。GitHubへの投稿・スレッド解決は依頼範囲で行い、履歴の書き換え・マージは明示的に依頼された場合に扱う。
 
-投稿する指摘は該当箇所へ個別にコメントする。`[nits]` などの使い分けは [コメントの接頭辞](skills/review-code/references/comment-prefixes.md)、
+投稿する指摘は該当箇所へ個別にコメントし、マージ前に修正が必要なものには `[must]` を付ける。使い分けは [コメントの接頭辞](skills/review-code/references/comment-prefixes.md)、
 受けた指摘への対応は [address-pr-comments](skills/address-pr-comments/SKILL.md) を参照する。
