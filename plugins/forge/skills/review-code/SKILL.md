@@ -44,7 +44,7 @@ description: 作業ツリー、コミット、Pull Request の差分をレビュ
 
 説明の推敲・図解が必要な場合や、発表資料・HTML の説明ページを求められた場合は、[sketch との連携](../create-pr/references/sketch-collaboration.md)に従い、利用可能なスキルで整えて元の内容と照合する。
 
-PR コメントやその草案には、意図に応じて `[nits]`・`[imo]`・`[question]`・`[issue]` を付ける。
+マージ前に修正が必要な指摘は、会話でのレビュー結果・PR コメント・その草案のいずれでも先頭に `[must]` を付け、修正を必須とする理由を示す。それ以外の PR コメントや草案には、意図に応じて `[nits]`・`[imo]`・`[question]`・`[issue]` を付ける。
 使い分けは [コメントの接頭辞](references/comment-prefixes.md) に従い、既存の書式指定がある場合はそちらを優先する。
 
 各指摘に次を含め、重要度の高い順に示す。
