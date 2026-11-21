@@ -8,7 +8,7 @@
 | --- | --- |
 | [polish-writing](skills/polish-writing/SKILL.md) | 日本語の意味と根拠を保ち、読みやすく簡潔に作成・推敲する |
 | [draw-mermaid](skills/draw-mermaid/SKILL.md) | Mermaid の図種を選び、作図・描画確認する |
-| [create-marp-slides](skills/create-marp-slides/SKILL.md) | Marp の構成・デザインを整え、全ページを描画確認する |
+| [create-slides](skills/create-slides/SKILL.md) | Marp・Google スライドで資料を作成・編集し、全ページの表示を確認する |
 | [explain-visually](skills/explain-visually/SKILL.md) | 図表と短い説明を組み合わせ、単一HTMLで共有する |
 
 ## 想定実行順序
@@ -42,17 +42,19 @@ flowchart TD
     purpose{"作りたい成果物"}
     purpose -->|文章| writing("文章の作成・推敲<br/>polish-writing")
     purpose -->|図| diagram("作図・描画確認<br/>draw-mermaid")
-    purpose -->|スライド| slides("構成・作成・描画確認<br/>create-marp-slides")
+    purpose -->|スライド| slides("構成・作成・描画確認<br/>create-slides")
     purpose -->|説明ページ| explain("図表・説明・操作確認<br/>explain-visually")
     writing --> prose["読みやすく整えた文章"]
     diagram --> rendered["Mermaidソース・SVG／PNG"]
     rendered -. 図が必要な場合 .-> slides
     rendered -. Mermaidを使う場合 .-> explain
-    slides --> output["発表用HTML・配布用PDF"]
+    slides -->|Marp| output["発表用HTML・配布用PDF"]
+    slides -->|Google スライド| deck["編集用 Google スライド"]
     explain --> page["共有用の単一HTML"]
 ```
 
-図のソースのみ、PDFのみなど、指定があれば出力形式を合わせる。
+旧 `create-marp-slides` の呼び出しは `create-slides` に変更する。Marp と Google スライドのどちらもこのスキルを使う。
+図のソースのみ、PDFのみなど、指定があれば出力形式を合わせる。形式が未指定で判断できない場合は、編集・共有する場所を確認する。
 
 ## 使い方
 
@@ -115,16 +117,35 @@ Markdown の Mermaid ブロックや `.mmd` ソースを出力し、必要に応
 - 「通信の方向を動く矢印で強調して。README 向けの静止版も用意して」
 - 「この図のノードから関連資料を開けるようにして」
 
+## 工程を動きで説明するスライド
+
+「create-slides で、通知タスクが失敗し、待機して再試行する流れを見せて。発表中は矢印キーで1工程ずつ送りたい」
+
+タスクの印を残したまま、位置と処理状態を更新する。工程ごとにページを分け、移動の途中でも通常のキーで進み、戻れるようにする。[移動・合流・再試行の作り方](skills/create-slides/references/flow-animation.md)
+
 ## Marp のスライド
 
-- 「create-marp-slides で、この提案を10分の発表にして。Markdown と PDF が欲しい」
+- 「create-slides で、この提案を10分の発表にして。Markdown と PDF が欲しい」
 - 「この Marp を、内容を保って読みやすくして。全ページの描画も確認して」
 
-日本語向けの [テーマ](skills/create-marp-slides/assets/theme.css) と [ひな形](skills/create-marp-slides/assets/deck-template.md) を同梱する。
+日本語向けの [テーマ](skills/create-slides/assets/theme.css) と [ひな形](skills/create-slides/assets/deck-template.md) を同梱する。
 構成と見た目を整え、編集用ソースと、発表用のフェード付き HTML・配布用の静止 PDF を出力する。形式の指定があればそちらを優先する。
 HTML は図やアイコンを埋め込んだ1ファイルとして共有できる。ダウンロードして対応ブラウザーで開くと、オフラインでもページ操作やアニメーションが動く。
 書き出しには利用環境の Marp を使い、PDF・画像などには対応ブラウザーも必要。
-標準の PPTX は画像ベースになる。環境と出力形式の詳細は [描画と出力](skills/create-marp-slides/references/rendering.md) を参照する。
+標準の PPTX は画像ベースになる。環境と出力形式の詳細は [描画と出力](skills/create-slides/references/rendering.md) を参照する。
+
+## Google スライド
+
+標準の納品物は編集用 Google スライド。配布用 PDF も欲しい場合は「PDF も付けて」と指定する。
+
+- 「create-slides で、この設計案を10分で説明する資料にして。Google スライドで編集したい」
+- 「この Google スライドをテンプレートに別資料を作って。原本は残して」
+- 「この Google スライドの比較表を更新して、文字の欠けも確認して」
+- 「手元の `demo.mp4` を Google スライドの3枚目に入れて。発表モードで動画の再生を確認して」
+
+新規作成・テンプレートからの作成・既存資料の編集に対応する。本文・表・図形を編集できる形で作り、保存後の内容と全ページの表示を確認する。
+Google スライドに接続できるコネクター・API・ブラウザー操作などが必要。接続や認証は同梱せず、利用環境で使える手段を選ぶ。
+接続できない場合も構成や本文案を作り、Google スライドへの反映が未完了であることを伝える。共有設定の変更や通知は依頼に合わせる。
 
 ## HTMLの説明ページ
 
@@ -138,7 +159,7 @@ HTMLだけをダウンロードしてブラウザーで開けるようにし、�
 ## 他のプラグインから利用する
 
 `ink`・`forge`・`probe`・`pulse` と併用する場合は `sketch` も導入する。
-文章の推敲や図解が必要なときに使い、Marp の発表資料・HTML の説明ページは依頼に合わせて作成する。
+文章の推敲や図解が必要なときに使い、Marp・Google スライドの発表資料、HTML の説明ページは依頼に合わせて作成する。
 
 | 呼び出し元 | 利用例 | 保持する情報 |
 | --- | --- | --- |

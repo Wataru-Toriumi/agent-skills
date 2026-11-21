@@ -32,4 +32,4 @@
 ## 参考
 
 [visual-explainer](https://github.com/nicobailon/visual-explainer/tree/9d5f880b7e8e0a9a80c890b8e1bb6918b68481ad) の、図を中心に説明する構成、比較時の配置、視覚的な強弱を参考にした。
-sketchでは用途に応じてMermaid・Marp・HTMLを選び、既存の配色と共有形式に合わせる。
+sketchでは用途に応じてMermaid・Marp・Google スライド・HTMLを選び、既存の配色と共有形式に合わせる。

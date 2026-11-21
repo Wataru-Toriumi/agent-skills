@@ -1,6 +1,6 @@
 ---
 name: explain-visually
-description: 仕組み・設計案・変更差分・比較を、図表と短い説明を組み合わせた単一HTMLにする。ブラウザーで読める説明ページや、操作しながら理解できる資料の作成・改善に使う。Mermaidソースが目的ならdraw-mermaid、発表スライドならcreate-marp-slidesを使う。
+description: 仕組み・設計案・変更差分・比較を、図表と短い説明を組み合わせた単一HTMLにする。ブラウザーで読める説明ページや、操作しながら理解できる資料の作成・改善に使う。Mermaidソースが目的ならdraw-mermaid、発表スライドならcreate-slidesを使う。
 ---
 
 # 図を中心に説明ページを作る
