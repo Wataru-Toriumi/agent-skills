@@ -63,6 +63,34 @@ flowchart TD
 問題の根拠、対策の採否、受け入れ条件、効果の測定方法を引き継ぐ。実装と運用への適用、効果の確認は分けて扱う。
 計画だけの依頼では作業候補を返し、実装・PRまで依頼されていれば、その範囲で続ける。連携先が未導入でも必要な情報を整理して進められる。
 
+## 設計・実装変更を監視へ反映する
+
+ink・forge から変更前後の利用経路、対象の版と環境、既存の指標・通知・初動を受け取り、`plan-monitoring` で見直す。
+不足する計測や未合意の閾値を明示し、監視案と必要な作業を呼び出し元へ返す。運用改善の効果評価は `improve-operations` で扱う。
+
+```mermaid
+---
+config:
+  theme: base
+  themeVariables:
+    fontFamily: sans-serif
+    primaryColor: "#F1F5F9"
+    primaryTextColor: "#0F172A"
+    primaryBorderColor: "#64748B"
+    lineColor: "#64748B"
+  flowchart:
+    curve: linear
+---
+flowchart TD
+    design["ink：設計の版<br/>変更前後の挙動"] -. 監視や初動に影響する場合 .-> plan("pulse<br/>監視設計")
+    code["forge：差分<br/>実装・適用状況"] -. 設計案と差分を照合 .-> plan
+    plan --> result["監視案・計測<br/>初動・検証方法"]
+    result --> caller["ink・forge<br/>元の変更へ反映"]
+```
+
+監視案ができたことと、設定の作成・適用・通知検証が済んだことは別に記録する。
+新旧版の共存中は各経路を確認し、新しい監視ができただけで旧監視を撤去しない。
+
 ## 導入
 
 利用するツールでマーケットプレイスを登録し、インストールする。
