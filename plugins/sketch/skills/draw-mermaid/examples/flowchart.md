@@ -42,6 +42,66 @@ flowchart LR
 `subgraph` 内の向きは外部との接続に影響されるため、方向指定だけで配置を固定できるとは考えない。
 外枠は境界、角丸は処理、円柱はデータに使い、薄い背景と余白で役割を分ける。
 
+## 申請フロー
+
+架空の申請手続きで、受付後の分岐を追う例。受付と矢印には標準のグレーを使い、判断・引き継ぎ・完了にだけ色を足す。
+
+```mermaid
+---
+config:
+  theme: base
+  look: classic
+  fontFamily: sans-serif
+  themeVariables:
+    primaryColor: "#F1F5F9"
+    primaryTextColor: "#0F172A"
+    primaryBorderColor: "#64748B"
+    lineColor: "#64748B"
+    edgeLabelBackground: "#FFFFFF"
+  flowchart:
+    curve: linear
+    rankSpacing: 40
+---
+flowchart LR
+    receive("申請を受領") --> check{"書類は完備？"}:::decision
+    check -->|はい| done(["受付完了"]):::complete
+    check -->|いいえ| handoff("申請者に返却"):::handoff
+    handoff -->|再提出| receive
+
+    classDef decision fill:#EEE9FA,stroke:#80709D,color:#44345E
+    classDef handoff fill:#E3EFF9,stroke:#6786A5,color:#294965
+    classDef complete fill:#DDF2E9,stroke:#5E8B79,color:#244E40
+```
+
+## 送信フロー
+
+通知を再送できる間は待機し、上限に達したら送信を打ち切る架空の例。
+
+```mermaid
+---
+config:
+  theme: base
+  look: classic
+  themeVariables:
+    primaryColor: "#F1F5F9"
+    primaryTextColor: "#0F172A"
+    primaryBorderColor: "#64748B"
+    lineColor: "#64748B"
+    edgeLabelBackground: "#FFFFFF"
+  flowchart:
+    curve: linear
+---
+flowchart LR
+    send("通知を送信") -->|送信成功| done(["送信完了"]):::complete
+    send -->|一時障害・再送可| wait("警告：再送待ち"):::warning
+    wait -->|待機後| send
+    send -->|再送上限に到達| failed(["失敗：送信終了"]):::failure
+
+    classDef complete fill:#DDF2E9,stroke:#5E8B79,color:#244E40
+    classDef warning fill:#FEF3C7,stroke:#B45309,color:#78350F
+    classDef failure fill:#FDE4E4,stroke:#B34A53,color:#75232F
+```
+
 ## 構文の確認先
 
 対応バージョンで使える構文は [Flowchart の公式資料](https://mermaid.js.org/syntax/flowchart.html) で確認する。
