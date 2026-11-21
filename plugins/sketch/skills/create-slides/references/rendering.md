@@ -39,6 +39,12 @@ HTML はフェードとページ操作、PDF は静止した内容とレイア�
 PPTX が必要なら `pnpm exec marp slides.md --html --theme-set ./theme.css --pptx -o slides.pptx` で生成する。
 編集可能な PPTX を求められた場合は、標準出力との差を説明する。実験的な `--pptx-editable` には追加環境が必要で、再現性とノートに制約があるため、利用するバージョンの公式資料を確認する。
 
+## PPTX にローカル動画を埋め込む
+
+1. 新規または指定された PPTX の対象ページを開く。Marp が元資料なら先に PPTX を書き出し、動画は書き出し後のファイルに追加する。再出力した場合も埋め込み直す。
+2. PowerPoint の「挿入」→「ビデオ」から端末のファイルを選び、「挿入」で埋め込む。生成ツールを使う場合も動画データを PPTX 内に格納する。たとえば PptxGenJS なら対象スライドの `addMedia` に `type: 'video'`、ローカルの `path`、配置寸法を渡す。縦横比を保ち、依頼に合わせて再生方法を設定する。[PowerPoint の動画埋め込み手順](https://support.microsoft.com/en-us/powerpoint/insert-and-play-a-video-file-from-your-computer)
+3. 完成した PPTX だけを別の場所にコピーし、元動画を参照できない環境の PowerPoint で対象ページを再生する。PowerPoint を使えない場合は、対象ページの動画参照が PPTX 内のメディアを指し、その中に指定動画のデータがあることを確認し、実機再生は未確認と伝える。納品は動画を含む PPTX ひとつでよい。
+
 ## スライド切り替えのフェード
 
 HTML での発表は、front matter に `transition: fade 0.3s` を指定する。

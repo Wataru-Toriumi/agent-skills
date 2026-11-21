@@ -1,6 +1,6 @@
 ---
 name: create-slides
-description: Marp または Google スライド（Google Slides）で発表資料を作成・編集する。提案や技術説明の構成案、Markdown からの HTML・PDF 出力、共同編集用の資料や既存デッキの更新に使う。
+description: Marp または Google スライド（Google Slides）で発表資料を作成・編集する。提案や技術説明の構成案、Markdown からの HTML・PDF 出力、共同編集用の資料、ローカル動画を埋め込む PowerPoint（PPTX）に使う。
 ---
 
 # 発表資料を作る
@@ -9,15 +9,16 @@ description: Marp または Google スライド（Google Slides）で発表資�
 
 読み手、求める判断、発表時間、投影用か配布用かを依頼と元資料から把握する。構成案だけを求められたら、見出しと要点を指定先に返す。
 
-作成・編集を依頼された場合は、指定された形式を優先する。指定がなければ既存資料と編集・共有する場所から選ぶ。それでも判断できない場合は、Markdown と Google スライドのどちらで編集したいかを確認する。
+作成・編集を依頼された場合は、指定された形式を優先する。指定がなければ既存資料と編集・共有する場所から選ぶ。それでも判断できない場合は、どのアプリで編集・発表するかを確認する。
 
 | 依頼・利用場面 | 制作時に読む手順 |
 | --- | --- |
 | Marp の Markdown を編集する、リポジトリで管理する、オフライン発表用 HTML・配布用 PDF を作る | [Marp での作成と出力](references/marp.md) |
+| 手元の動画を PowerPoint で再生し、PPTX ひとつで渡す | [PPTX にローカル動画を埋め込む](references/rendering.md#pptx-にローカル動画を埋め込む) |
 | Google スライドで共同編集する、Drive 上のテンプレートから作る、既存の Google スライドを更新する | [Google スライドでの作成と編集](references/google-slides.md) |
 
 Google スライドを作成・更新したら、編集用デッキの URL を渡す。配布用 PDF は依頼された場合だけ、保存済みの最終版から書き出す。
-手元の録画などを載せる場合は、[ローカル動画の挿入手順](references/google-slides.md#ローカル動画を挿入する)に従い、指定ファイルを動画として配置する。
+Google スライドに手元の録画を載せる場合は、[Drive から動画を挿入する](references/google-slides.md#ローカル動画を挿入する)。
 
 他のプラグインから資料を受け取った場合は、[受け取りと返却の手順](../polish-writing/references/plugin-collaboration.md)に沿って根拠・変更範囲・出力先を引き継ぐ。
 
