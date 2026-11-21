@@ -28,6 +28,8 @@ probe の指摘や反例を受け取った場合は、設計の版・要求・�
 
 観点の選択やトレードオフの整理に迷う場合は [フレームワークの使い方](references/framework.md)、指摘の粒度は [レビュー例](references/review-example.md) を参照する。
 
+変更後の失敗を既存の監視や初動で捉えられるかが論点なら、[pulse への引き継ぎ](../write-design-doc/references/monitoring-handoff.md)を使い、戻った監視案と未確認事項を設計評価に含める。
+
 形式検証に加えてテスト方針・ケースの具体化やレビューが必要なら、[probe への引き継ぎ](../write-design-doc/references/verification-handoff.md)を使う。返された計画と実行結果を区別し、必要な検証と残る不確実性を設計評価に戻す。
 
 ## 指摘と不確実性を分ける
