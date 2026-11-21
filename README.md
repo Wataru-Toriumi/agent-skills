@@ -16,6 +16,9 @@ DevOps のワークフローを補助する、Claude Code・Codex 向けのス�
 
 各プラグインの役割と未対応の範囲は [DevOps サイクルとの対応](docs/devops-coverage.md) を参照する。
 
+ink・forge・probe・pulse の文書や報告は、必要に応じて [sketch](plugins/sketch/README.md#他のプラグインから利用する) で推敲・図解できる。
+Marp の発表資料や HTML の説明ページも、依頼に合わせて作成する。sketch の導入は任意。
+
 ## プラグインを追加する
 
 [mise](https://mise.jdx.dev/getting-started.html) を導入し、リポジトリのルートで実行する。
