@@ -19,7 +19,7 @@ DevOps のワークフローを補助する、Claude Code・Codex 向けのス�
 ink・forge・probe・pulse の文書や報告は、必要に応じて [sketch](plugins/sketch/README.md#他のプラグインから利用する) で推敲・図解できる。
 Marp・Google スライドの発表資料や HTML の説明ページも、依頼に合わせて作成する。sketch の導入は任意。
 
-pulse の運用改善を ink で要求・作業項目にし、forge で実装・検証へ進められる。
+pulse の運用実績から設計の前提を見直すときは、ink で設計をレビューする。改善策は ink で要求・作業項目にし、forge で実装・検証へ進められる。
 依頼された範囲で必要な工程を選び、実装の完了と運用での効果確認を分ける。使い方は [pulse の連携](plugins/pulse/README.md#改善策を実装へつなぐ) を参照する。
 
 要求・設計から検証へ、検証結果から修正へ、設計・実装の変更から監視へも連携できる。
