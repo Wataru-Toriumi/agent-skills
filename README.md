@@ -19,6 +19,9 @@ DevOps のワークフローを補助する、Claude Code・Codex 向けのス�
 ink・forge・probe・pulse の文書や報告は、必要に応じて [sketch](plugins/sketch/README.md#他のプラグインから利用する) で推敲・図解できる。
 Marp の発表資料や HTML の説明ページも、依頼に合わせて作成する。sketch の導入は任意。
 
+pulse の運用改善を ink で要求・作業項目にし、forge で実装・検証へ進められる。
+依頼された範囲で必要な工程を選び、実装の完了と運用での効果確認を分ける。使い方は [pulse の連携](plugins/pulse/README.md#改善策を実装へつなぐ) を参照する。
+
 ## プラグインを追加する
 
 [mise](https://mise.jdx.dev/getting-started.html) を導入し、リポジトリのルートで実行する。
