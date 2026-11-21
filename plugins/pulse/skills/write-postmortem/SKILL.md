@@ -27,3 +27,4 @@ description: 障害の対応記録と観測データから、影響・経緯・�
 
 既定の出力先は会話。指定があれば保存する。公開・課題登録は依頼の範囲で行う。
 複数の障害や運用負荷を横断して優先度を決める場合は [improve-operations](../improve-operations/SKILL.md) を使う。
+個別の改善策を要求・作業項目・実装へ進める場合は、[改善策の引き継ぎ](../improve-operations/references/implementation-handoff.md)に従い、依頼の到達点まで進める。
