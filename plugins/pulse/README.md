@@ -45,6 +45,7 @@ flowchart TD
     incident -->|復旧後| postmortem
     postmortem --> improve
     improve -->|監視を見直す場合| monitoring
+    improve -. 設計の前提が実績とずれた場合 .-> review("設計判断を再評価<br/>ink：review-design")
     postmortem -. 改善策を具体化 .-> item("要求・作業項目を整理<br/>ink")
     improve -. 改善策を具体化 .-> item
     item -. 実装も依頼された場合 .-> implement("実装・検証・提出<br/>forge")
@@ -57,6 +58,7 @@ flowchart TD
 ## 改善策を実装へつなぐ
 
 振り返りや改善計画を次の作業へ進めたい場合は、利用可能な ink・forge と連携する。
+処理量や復旧時間が設計時の想定から外れたら、元の前提と運用記録を ink の `review-design` に渡し、採用した方式を再評価する。
 要求が曖昧なら ink の `clarify-requirements`、作業単位や受け入れ条件を整えるなら `write-work-item`、
 実装する条件が揃っていれば forge の `implement-work-item` を使う。
 
