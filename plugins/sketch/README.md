@@ -8,7 +8,7 @@
 | --- | --- |
 | [polish-writing](skills/polish-writing/SKILL.md) | 日本語の意味と根拠を保ち、読みやすく簡潔に作成・推敲する |
 | [draw-mermaid](skills/draw-mermaid/SKILL.md) | Mermaid の図種を選び、作図・描画確認する |
-| [create-slides](skills/create-slides/SKILL.md) | Marp・Google スライドで資料を作成・編集し、全ページの表示を確認する |
+| [create-slides](skills/create-slides/SKILL.md) | Marp・Google スライドで資料を作成・編集する。動画入り PPTX の作成にも対応する |
 | [explain-visually](skills/explain-visually/SKILL.md) | 図表と短い説明を組み合わせ、単一HTMLで共有する |
 
 ## 想定実行順序
@@ -49,6 +49,7 @@ flowchart TD
     rendered -. 図が必要な場合 .-> slides
     rendered -. Mermaidを使う場合 .-> explain
     slides -->|Marp| output["発表用HTML・配布用PDF"]
+    slides -->|PowerPoint| pptx["ローカル動画を埋め込んだ PPTX"]
     slides -->|Google スライド| deck["編集用 Google スライド"]
     explain --> page["共有用の単一HTML"]
 ```
@@ -133,6 +134,10 @@ Markdown の Mermaid ブロックや `.mmd` ソースを出力し、必要に応
 HTML は図やアイコンを埋め込んだ1ファイルとして共有できる。ダウンロードして対応ブラウザーで開くと、オフラインでもページ操作やアニメーションが動く。
 書き出しには利用環境の Marp を使い、PDF・画像などには対応ブラウザーも必要。
 標準の PPTX は画像ベースになる。環境と出力形式の詳細は [描画と出力](skills/create-slides/references/rendering.md) を参照する。
+
+## 動画入り PowerPoint
+
+「手元の `demo.mp4` を3枚目に入れて、PPTX ひとつで渡して」。動画はファイル内に埋め込むので、Drive へのアップロードは不要。[PPTX への埋め込み手順](skills/create-slides/references/rendering.md#pptx-にローカル動画を埋め込む)
 
 ## Google スライド
 
