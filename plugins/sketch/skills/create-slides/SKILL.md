@@ -17,6 +17,8 @@ description: Marp または Google スライド（Google Slides）で発表資�
 | 手元の動画を PowerPoint で再生し、PPTX ひとつで渡す | [PPTX にローカル動画を埋め込む](references/rendering.md#pptx-にローカル動画を埋め込む) |
 | Google スライドで共同編集する、Drive 上のテンプレートから作る、既存の Google スライドを更新する | [Google スライドでの作成と編集](references/google-slides.md) |
 
+挿入する動画に字幕も求められたら、[caption-video](../caption-video/SKILL.md) で作成した字幕付き MP4 を使う。
+
 Google スライドを作成・更新したら、編集用デッキの URL を渡す。配布用 PDF は依頼された場合だけ、保存済みの最終版から書き出す。
 Google スライドに手元の録画を載せる場合は、[Drive から動画を挿入する](references/google-slides.md#ローカル動画を挿入する)。
 
