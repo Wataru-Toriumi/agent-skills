@@ -1,6 +1,6 @@
 # sketch
 
-文章・図・スライド・HTMLの説明ページで伝える、Claude Code / Codex 用プラグイン。
+文章・図・スライド・字幕付き動画・HTMLの説明ページで伝える、Claude Code / Codex 用プラグイン。
 
 変更履歴は [GitHub Releases](https://github.com/Wataru-Toriumi/agent-skills/releases?q=sketch) を参照する。
 
@@ -9,6 +9,7 @@
 | [polish-writing](skills/polish-writing/SKILL.md) | 日本語の意味と根拠を保ち、読みやすく簡潔に作成・推敲する |
 | [draw-mermaid](skills/draw-mermaid/SKILL.md) | Mermaid の図種を選び、作図・描画確認する |
 | [create-slides](skills/create-slides/SKILL.md) | Marp・Google スライドで資料を作成・編集する。動画入り PPTX の作成にも対応する |
+| [caption-video](skills/caption-video/SKILL.md) | ナレーションや無音の操作デモに字幕を付け、字幕付き MP4 と編集用 SRT を作る |
 | [explain-visually](skills/explain-visually/SKILL.md) | 図表と短い説明を組み合わせ、単一HTMLで共有する |
 
 ## 想定実行順序
@@ -42,6 +43,9 @@ flowchart TD
     purpose{"作りたい成果物"}
     purpose -->|文章| writing("文章の作成・推敲<br/>polish-writing")
     purpose -->|図| diagram("作図・描画確認<br/>draw-mermaid")
+    purpose -->|動画字幕| captions("字幕の作成・同期確認<br/>caption-video")
+    captions --> media["字幕付き MP4・編集用 SRT"]
+    media -. 動画を挿入する場合 .-> slides
     purpose -->|スライド| slides("構成・作成・描画確認<br/>create-slides")
     purpose -->|説明ページ| explain("図表・説明・操作確認<br/>explain-visually")
     writing --> prose["読みやすく整えた文章"]
@@ -135,6 +139,11 @@ Markdown の Mermaid ブロックや `.mmd` ソースを出力し、必要に応
 HTML は図やアイコンを埋め込んだ1ファイルとして共有できる。ダウンロードして対応ブラウザーで開くと、オフラインでもページ操作やアニメーションが動く。
 書き出しには利用環境の Marp を使い、PDF・画像などには対応ブラウザーも必要。
 標準の PPTX は画像ベースになる。環境と出力形式の詳細は [描画と出力](skills/create-slides/references/rendering.md) を参照する。
+
+## 動画の字幕
+
+「caption-video で、この無音の操作デモに日本語の説明字幕を付けて。編集用の SRT も欲しい」
+ナレーションの文字起こしや既存 SRT の修正にも対応する。字幕付き MP4 の書き出しには、字幕描画に対応した FFmpeg などを使う。[字幕作成の手順](skills/caption-video/SKILL.md)
 
 ## 動画入り PowerPoint
 
