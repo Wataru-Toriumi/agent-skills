@@ -9,20 +9,42 @@ GitHub の Markdown では `mermaid` コードブロックを使う。GitHub 上
 掲載先のバージョンが不明なら基本構文を起点にし、追加のアイコンパック、HTML ラベル、独自 CSS、追加レイアウトに依存する前に対応を確認する。
 GitHub 上で確認するためだけに PR やコメントを投稿しない。公開が依頼の範囲でなければ、手元の確認結果と掲載先未確認の旨を渡す。
 
+## Mermaid CLI を導入する
+
+Markdown の図は、掲載先が Mermaid に対応していればプレビューだけで確認できる。手元で SVG・PNG・PDF を生成するときは、既存の `mmdc` を使うか、Node.js と pnpm が使える環境で Mermaid CLI を導入する。
+
+一度だけ試す場合は空の作業ディレクトリで `pnpm init` を実行する。以下は、端末の Chrome を使って描画する例。CLI をインストールしたディレクトリでバージョンを確認する。[Mermaid CLI の公式手順](https://github.com/mermaid-js/mermaid-cli#installation)
+
+```sh
+pnpm add -D @mermaid-js/mermaid-cli --ignore-scripts
+pnpm exec mmdc --version
+```
+
+この例ではインストール時のブラウザーダウンロードを省く。Chrome がなければ [Chrome の配布ページ](https://www.google.com/chrome/)から導入する。`puppeteer.json` にブラウザーの実行ファイルのパスを書く。次は macOS の例。[Puppeteer のブラウザー設定](https://pptr.dev/guides/configuration)
+
+```json
+{
+  "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+}
+```
+
+同じディレクトリで小さな図を描き、`sample.svg` を開いて「受付」から「完了」へ矢印がつながることを確かめる。
+
+```sh
+printf '%s\n' 'flowchart LR' '  A[受付] --> B[完了]' > sample.mmd
+pnpm exec mmdc -p puppeteer.json -i sample.mmd -o sample.svg
+```
+
 ## ローカルの Mermaid CLI を使う場合
 
-Mermaid CLI はブラウザーを使って SVG / PNG / PDF を出力する。既存の `mmdc` があればそれを使い、プロジェクトに導入済みなら次のように pnpm 経由で実行できる。
-`diagram.mmd` の内容はコードフェンスを含まない Mermaid ソースにする。
+以下はプロジェクトに導入済みの CLI がブラウザーを自動検出できる場合の例。上の手順で Chrome を指定した環境では、各コマンドに `-p puppeteer.json` を付ける。`diagram.mmd` にはコードフェンスを含まない Mermaid ソースを置く。
 
 ```sh
 pnpm exec mmdc -i diagram.mmd -o diagram.svg
 pnpm exec mmdc -i diagram.mmd -o diagram.png
 ```
 
-`mmdc` が未導入なら、環境と依頼の範囲に応じて一時ディレクトリへ CLI を導入するか、利用可能な別のプレビューを使う。導入する場合は使用バージョンを記録する。
-プラグインの導入だけでは CLI やブラウザーは追加されない。Mermaid を書くだけのために利用先の `package.json` や lockfile を変更しない。
-
-CLI のオプションは導入済み版の `mmdc --help` で確認する。既存ブラウザーの利用など Puppeteer の調整が必要なら、その版の設定方法に従う。
+CLI の使用バージョンを記録し、オプションは導入済み版の `mmdc --help` で確認する。
 ブラウザー不足や起動制限を構文エラーと取り違えず、環境エラーが解消できなければソースの確認までで止める。
 Markdown 全体を CLI に入力すると画像参照へ変換するモードもあるため、元文書をそのまま上書きせず、個別の図か一時コピーで検証する。
 
