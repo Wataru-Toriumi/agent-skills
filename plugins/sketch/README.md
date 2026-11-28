@@ -1,6 +1,6 @@
 # sketch
 
-文章・図・スライド・字幕付き動画・HTMLの説明ページで伝える、Claude Code / Codex 用プラグイン。
+文章・図・操作デモ・スライド・字幕付き動画・HTMLの説明ページで伝える、Claude Code / Codex 用プラグイン。
 
 変更履歴は [GitHub Releases](https://github.com/Wataru-Toriumi/agent-skills/releases?q=sketch) を参照する。
 
@@ -8,6 +8,7 @@
 | --- | --- |
 | [polish-writing](skills/polish-writing/SKILL.md) | 日本語の意味と根拠を保ち、読みやすく簡潔に作成・推敲する |
 | [draw-mermaid](skills/draw-mermaid/SKILL.md) | Mermaid の図種を選び、作図・描画確認する |
+| [create-demo](skills/create-demo/SKILL.md) | 実装した変更を実演し、操作手順・結果・参加者への問いをまとめる |
 | [create-slides](skills/create-slides/SKILL.md) | Marp・Google スライドで資料を作成・編集する。動画入り PPTX の作成にも対応する |
 | [caption-video](skills/caption-video/SKILL.md) | ナレーションや無音の操作デモに字幕を付け、字幕付き MP4 と編集用 SRT を作る |
 | [explain-visually](skills/explain-visually/SKILL.md) | 図表と短い説明を組み合わせ、単一HTMLで共有する |
@@ -43,6 +44,8 @@ flowchart TD
     purpose{"作りたい成果物"}
     purpose -->|文章| writing("文章の作成・推敲<br/>polish-writing")
     purpose -->|図| diagram("作図・描画確認<br/>draw-mermaid")
+    purpose -->|操作デモ| demo("シナリオ作成・実演<br/>create-demo")
+    demo -. 録画に字幕を付ける場合 .-> captions
     purpose -->|動画字幕| captions("字幕の作成・同期確認<br/>caption-video")
     captions --> media["字幕付き MP4・編集用 SRT"]
     media -. 動画を挿入する場合 .-> slides
@@ -76,6 +79,12 @@ codex plugin add sketch@toripeeeeee-plugins
 ```
 
 Claude Code では `/sketch:<スキル名>`、Codex ではスキル一覧やスキル名から利用する。
+
+## 操作デモ
+
+「create-demo で、スプリントレビュー用にリンク切れ検査を実演して。エラー表示から修正箇所が分かるか確かめたい」
+
+スプリントレビュー用の手順は Markdown に保存する。この例では、プロジェクトに保存先の決まりがなければ `docs/demos/plugin-check.md` に残す。会話で受け取りたいときは「会話だけで」と指定する。[リンク切れを直すデモの出力例](skills/create-demo/examples/plugin-check.md)
 
 ## 日本語の文章
 
