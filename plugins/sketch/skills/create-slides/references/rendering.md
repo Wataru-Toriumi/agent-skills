@@ -5,8 +5,7 @@
 既存の Marp CLI、プロジェクトのコマンド、Marp for VS Code を優先し、実際のバージョンとオプションを確認する。
 このスキルに CLI・ブラウザーは同梱しない。導入が必要なら利用先のルールと依頼範囲に従い、一時的な検証のために既存プロジェクトの依存関係を増やさない。
 
-pnpm のプロジェクトへ導入する場合は `pnpm add -D @marp-team/marp-cli` とし、lockfile でバージョンを固定する。
-以下は導入済みの CLI を使い、`slides.md` と `theme.css` を同じディレクトリに置いた例。
+[形式別のセットアップ手順](setup.md)で CLI とブラウザーを用意したら、`slides.md` と `theme.css` を同じディレクトリに置いて出力する。
 
 ```sh
 pnpm exec marp --version
