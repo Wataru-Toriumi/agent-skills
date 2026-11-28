@@ -9,11 +9,12 @@
 | [plan-monitoring](skills/plan-monitoring/SKILL.md) | 利用者への影響から、監視指標・通知条件・初動を設計する |
 | [respond-to-incident](skills/respond-to-incident/SKILL.md) | 発生中の障害を切り分け、影響の軽減と復旧確認を進める |
 | [write-postmortem](skills/write-postmortem/SKILL.md) | 障害の経緯と寄与要因から、再発・影響を減らす対策をまとめる |
-| [improve-operations](skills/improve-operations/SKILL.md) | 運用負荷や障害の傾向から、改善の優先度と効果の測り方を決める |
+| [improve-operations](skills/improve-operations/SKILL.md) | 費用や当番の負荷から、取り組む改善策と効果の測り方を決める |
+| [optimize-log-volume](skills/optimize-log-volume/SKILL.md) | イベントごとに削減策と残す記録を決め、削減量と記録の欠落を確かめる |
 
 ## 想定実行順序
 
-障害時は `respond-to-incident`、定期的な見直しは、日常の運用記録をもとに `improve-operations` から始められる。
+障害時は `respond-to-incident`、運用課題の定期的な見直しは `improve-operations` を使う。ログ量の調査・削減が目的なら、`optimize-log-volume` から始める。
 
 ```mermaid
 ---
@@ -45,6 +46,7 @@ flowchart TD
     incident -->|復旧後| postmortem
     postmortem --> improve
     improve -->|監視を見直す場合| monitoring
+    improve -. ログ削減を具体化する場合 .-> logs("ログの削減策を選ぶ<br/>optimize-log-volume")
     improve -. 設計の前提が実績とずれた場合 .-> review("設計判断を再評価<br/>ink：review-design")
     postmortem -. 改善策を具体化 .-> item("要求・作業項目を整理<br/>ink")
     improve -. 改善策を具体化 .-> item
@@ -112,7 +114,8 @@ codex plugin add pulse@toripeeeeee-plugins
 Claude Code では `/pulse:<スキル名>`（例: `/pulse:plan-monitoring`）で呼び出す。
 Codex ではスキル一覧から選ぶか、スキル名を指定して依頼する。
 
-- 「improve-operations で、今月の障害・通知・手作業から改善案に優先度を付けて」
+- 「improve-operations で、ログ費用の削減と夜間の手動復旧の削減のどちらを先に進めるか比較して」
+- 「optimize-log-volume で、取り込み量の多いログを特定して。障害調査と監査に必要な記録を残せる削減案を出して」
 - 「plan-monitoring で、このサービスの監視と通知条件を整理して」
 - 「respond-to-incident で、このアラートとログから影響範囲と次の確認を整理して」
 - 「write-postmortem で、この対応記録から振り返りを書いて」
