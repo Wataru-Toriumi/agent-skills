@@ -13,7 +13,7 @@
 | [tidy-code](skills/tidy-code/SKILL.md) | 今触る箇所を小さく整え、理解や次の変更を助ける |
 | [commit-changes](skills/commit-changes/SKILL.md) | 差分を確認し、意味のある単位でコミットする |
 | [create-pr](skills/create-pr/SKILL.md) | 変更と検証結果を整理し、GitHub PR を作成・更新する |
-| [review-code](skills/review-code/SKILL.md) | 差分と関連コードを読み、根拠のある問題を指摘する |
+| [review-code](skills/review-code/SKILL.md) | 差分と関連コードをレビューし、PR の変更種別と根拠を示して Approve の可否を判定する |
 | [address-pr-comments](skills/address-pr-comments/SKILL.md) | 受けた PR コメントを確認し、修正・検証・返信を進める |
 
 コミットには Git、PR の操作には利用環境の GitHub 接続ツールまたは CLI と認証が必要。
