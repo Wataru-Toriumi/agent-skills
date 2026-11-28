@@ -14,7 +14,7 @@
 
 ## 想定実行順序
 
-障害時は `respond-to-incident`、運用課題の定期的な見直しは `improve-operations` を使う。ログ量の調査・削減が目的なら、`optimize-log-volume` から始める。
+発生中の障害には `respond-to-incident` を使い、復旧後の振り返りは `write-postmortem` で行う。ログ削減が目的なら `optimize-log-volume`、ログ費用と他の運用課題の優先度を比べるなら `improve-operations` から始める。
 
 ```mermaid
 ---
@@ -59,13 +59,13 @@ flowchart TD
 
 ## 改善策を実装へつなぐ
 
-振り返りや改善計画を次の作業へ進めたい場合は、利用可能な ink・forge と連携する。
-処理量や復旧時間が設計時の想定から外れたら、元の前提と運用記録を ink の `review-design` に渡し、採用した方式を再評価する。
-要求が曖昧なら ink の `clarify-requirements`、作業単位や受け入れ条件を整えるなら `write-work-item`、
-実装する条件が揃っていれば forge の `implement-work-item` を使う。
+計画の依頼では作業候補を返す。実装や PR まで依頼された場合は、問題の根拠、対策の採否、受け入れ条件、効果の測り方を引き継ぐ。
 
-問題の根拠、対策の採否、受け入れ条件、効果の測定方法を引き継ぐ。実装と運用への適用、効果の確認は分けて扱う。
-計画だけの依頼では作業候補を返し、実装・PRまで依頼されていれば、その範囲で続ける。連携先が未導入でも必要な情報を整理して進められる。
+- 処理量や復旧時間が設計時の想定を外れたら、ink の `review-design` で元の前提と運用記録を照合する。
+- 要求を明らかにするには ink の `clarify-requirements`、作業単位や受け入れ条件を決めるには `write-work-item` を使う。
+- 実装の条件がそろえば forge の `implement-work-item` を使う。実装、本番適用、効果確認はそれぞれの実施状況を記録する。
+
+連携先が未導入でも、[引き継ぐ情報](skills/improve-operations/references/implementation-handoff.md)を整理して依頼の範囲で進められる。
 
 ## 設計・実装変更を監視へ反映する
 
